@@ -48,49 +48,6 @@ export default function Contact() {
               </a>
             </div>
           </div>
-
-          {/* Premium Social Links */}
-          <div className="flex justify-center space-x-6 fade-in-up">
-            <a 
-              href="https://linkedin.com/company/hacksters" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group relative p-4 rounded-2xl border border-cyan-400/15 hover:border-blue-400/30 transition-all duration-500 glass-morphism hover:shadow-lg hover:shadow-blue-400/5"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <span className="relative text-2xl group-hover:text-blue-400 transition-colors duration-300">💼</span>
-            </a>
-            
-            <a 
-              href="https://github.com/hacksters" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group relative p-4 rounded-2xl border border-cyan-400/15 hover:border-gray-300/30 transition-all duration-500 glass-morphism hover:shadow-lg hover:shadow-gray-300/5"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-300/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <span className="relative text-2xl group-hover:text-gray-300 transition-colors duration-300">🐙</span>
-            </a>
-            
-            <a 
-              href="https://twitter.com/hacksters" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group relative p-4 rounded-2xl border border-cyan-400/15 hover:border-blue-300/30 transition-all duration-500 glass-morphism hover:shadow-lg hover:shadow-blue-300/5"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <span className="relative text-2xl group-hover:text-blue-300 transition-colors duration-300">🐦</span>
-            </a>
-            
-            <a 
-              href="https://instagram.com/hacksters" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group relative p-4 rounded-2xl border border-cyan-400/15 hover:border-pink-400/30 transition-all duration-500 glass-morphism hover:shadow-lg hover:shadow-pink-400/5"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <span className="relative text-2xl group-hover:text-pink-400 transition-colors duration-300">📷</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>

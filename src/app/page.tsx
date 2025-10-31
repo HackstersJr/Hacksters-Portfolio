@@ -5,6 +5,7 @@ import Gallery from '@/components/Gallery';
 import About from '@/components/About';
 import Team from '@/components/Team';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 import Scripts from '@/components/Scripts';
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <About />
       <Team />
       <Contact />
+      <Footer />
       <Scripts />
     </main>
   );
