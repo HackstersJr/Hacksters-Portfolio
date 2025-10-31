@@ -85,7 +85,7 @@ export default function About() {
             <div>
               <h2 
                 className="text-4xl md:text-6xl font-semibold mb-4"
-                style={{ fontFamily: '"Chillax", var(--font-inter), sans-serif', letterSpacing: '-0.02em' }}
+                style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.01em' }}
               >
                 <span className="text-white">About</span> <span className="neon-text">Us</span>
               </h2>

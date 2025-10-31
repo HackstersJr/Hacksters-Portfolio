@@ -49,8 +49,8 @@ export default function Gallery() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 neon-text fade-in-up font-chillax">
-          Innovation Gallery
+                <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 neon-text fade-in-up" style={{ fontFamily: 'Grafier, sans-serif' }}>
+          Gallery
         </h2>
 
         {/* Gallery Container with Enhanced Background */}

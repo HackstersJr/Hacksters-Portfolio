@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Righteous } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const righteous = Righteous({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-righteous",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
         <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet" />
         <Script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" strategy="beforeInteractive" />
       </head>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} ${righteous.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -179,9 +179,9 @@ export default function Timeline() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header Section */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 font-chillax">
-            <span className="text-white">Our</span>{' '}
-            <span className="neon-text">Journey</span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="text-white font-chillax">Our</span>{' '}
+            <span className="neon-text" style={{ fontFamily: 'Grafier, sans-serif' }}>Journey</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-chillax">
             From humble beginnings to technological innovation leaders
