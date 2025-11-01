@@ -1,7 +1,6 @@
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
-import Gallery from '@/components/Gallery';
 import WhereWeveBeenSection from '@/components/WhereWeveBeenSection';
 import BehindTheScenesSection from '@/components/BehindTheScenesSection';
 import About from '@/components/About';
@@ -20,7 +19,6 @@ export default function Home() {
         <Timeline />
         <WhereWeveBeenSection />
         <BehindTheScenesSection />
-        <Gallery />
         <About />
         <Team />
         <Contact />

@@ -14,6 +14,7 @@ type FilterType = 'all' | 'win' | 'participated';
 interface PhotoData {
   src: string;
   eventName: string;
+  eventId: string;
   university: string;
   year: string;
   category: 'win' | 'participated';
@@ -21,10 +22,17 @@ interface PhotoData {
 
 export default function BehindTheScenesSection() {
   const [filter, setFilter] = useState<FilterType>('all');
+  const [selectedEvent, setSelectedEvent] = useState<string>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [currentEventPhotos, setCurrentEventPhotos] = useState<{ src: string }[]>([]);
   const [visibleCount, setVisibleCount] = useState(20);
+
+  // Get unique events for the selected category
+  const availableEvents = useMemo(() => {
+    if (filter === 'all') return BTS_EVENTS;
+    return BTS_EVENTS.filter(event => event.category === filter);
+  }, [filter]);
 
   // Prepare all photos with metadata
   const allPhotos = useMemo(() => {
@@ -36,6 +44,7 @@ export default function BehindTheScenesSection() {
         photos.push({
           src,
           eventName: event.name,
+          eventId: event.id,
           university: event.university,
           year: event.year,
           category: event.category,
@@ -46,17 +55,29 @@ export default function BehindTheScenesSection() {
     return photos;
   }, []);
 
-  // Filter photos based on selected filter
+  // Filter photos based on selected filter and event
   const filteredPhotos = useMemo(() => {
-    if (filter === 'all') return allPhotos;
-    return allPhotos.filter(photo => photo.category === filter);
-  }, [allPhotos, filter]);
+    let photos = allPhotos;
+    
+    // Filter by category
+    if (filter !== 'all') {
+      photos = photos.filter(photo => photo.category === filter);
+    }
+    
+    // Filter by specific event
+    if (selectedEvent !== 'all') {
+      photos = photos.filter(photo => photo.eventId === selectedEvent);
+    }
+    
+    return photos;
+  }, [allPhotos, filter, selectedEvent]);
 
   // Visible photos (for load more functionality)
   const visiblePhotos = filteredPhotos.slice(0, visibleCount);
 
   const breakpointColumns = {
-    default: 4,
+    default: 5,
+    1536: 4,
     1280: 3,
     768: 2,
     640: 2,
@@ -78,6 +99,17 @@ export default function BehindTheScenesSection() {
 
   const loadMore = () => {
     setVisibleCount(prev => prev + 20);
+  };
+
+  const handleFilterChange = (newFilter: FilterType) => {
+    setFilter(newFilter);
+    setSelectedEvent('all'); // Reset event filter when category changes
+    setVisibleCount(20);
+  };
+
+  const handleEventChange = (eventId: string) => {
+    setSelectedEvent(eventId);
+    setVisibleCount(20);
   };
 
   const filterButtons: { label: string; value: FilterType }[] = [
@@ -117,15 +149,12 @@ export default function BehindTheScenesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-8"
         >
           {filterButtons.map(btn => (
             <button
               key={btn.value}
-              onClick={() => {
-                setFilter(btn.value);
-                setVisibleCount(20); // Reset count when filter changes
-              }}
+              onClick={() => handleFilterChange(btn.value)}
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 filter === btn.value
                   ? 'bg-cyan-500/20 text-cyan-400 border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20'
@@ -139,6 +168,40 @@ export default function BehindTheScenesSection() {
             </button>
           ))}
         </motion.div>
+
+        {/* Event Sub-filters (show when not on 'all' filter) */}
+        {filter !== 'all' && availableEvents.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-wrap justify-center gap-2 mb-12"
+          >
+            <button
+              onClick={() => handleEventChange('all')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                selectedEvent === 'all'
+                  ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-400/40'
+                  : 'bg-neutral-800/30 text-neutral-500 border border-neutral-700/30 hover:border-cyan-400/20 hover:text-cyan-400'
+              }`}
+            >
+              All {filter === 'win' ? 'Wins' : 'Participated'}
+            </button>
+            {availableEvents.map(event => (
+              <button
+                key={event.id}
+                onClick={() => handleEventChange(event.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  selectedEvent === event.id
+                    ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-400/40'
+                    : 'bg-neutral-800/30 text-neutral-500 border border-neutral-700/30 hover:border-cyan-400/20 hover:text-cyan-400'
+                }`}
+              >
+                {event.name}
+              </button>
+            ))}
+          </motion.div>
+        )}
 
         {/* Masonry Grid */}
         {visiblePhotos.length > 0 ? (
@@ -163,12 +226,13 @@ export default function BehindTheScenesSection() {
                   onClick={() => openLightbox(photo, index)}
                 >
                   <div className="relative overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20">
-                    <div className="relative aspect-[4/5] md:aspect-[3/4]">
+                    <div className="relative">
                       <Image
                         src={photo.src}
                         alt={`${photo.eventName} - BTS`}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        width={600}
+                        height={800}
+                        className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, 20vw"
                       />
                       
