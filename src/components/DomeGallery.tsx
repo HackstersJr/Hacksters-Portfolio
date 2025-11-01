@@ -930,22 +930,16 @@ export default function DomeGallery({
                       backfaceVisibility: 'hidden'
                     }}
                   >
-                    {it.src ? (
-                      <img
-                        src={it.src}
-                        draggable={false}
-                        alt={it.alt}
-                        className="w-full h-full object-cover pointer-events-none"
-                        style={{
-                          backfaceVisibility: 'hidden',
-                          filter: `var(--image-filter, ${grayscale ? 'grayscale(1)' : 'none'})`
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-300 animate-pulse flex items-center justify-center">
-                        <div className="text-gray-500 text-xs">No image</div>
-                      </div>
-                    )}
+                    <img
+                      src={it.src || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg"%3E%3C/svg%3E'}
+                      draggable={false}
+                      alt={it.alt}
+                      className="w-full h-full object-cover pointer-events-none"
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        filter: `var(--image-filter, ${grayscale ? 'grayscale(1)' : 'none'})`
+                      }}
+                    />
                   </div>
                 </div>
               ))}

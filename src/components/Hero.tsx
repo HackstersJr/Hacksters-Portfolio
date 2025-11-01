@@ -16,10 +16,10 @@ export default function Hero() {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Map Cloudinary images to DomeGallery format with proper validation
+  // Map Cloudinary images to DomeGallery format - ONLY use actual images
   const domeImages = useMemo(() => {
     if (!data?.images || data.images.length === 0) {
-      // Return empty array - dome will show default images
+      // Don't show dome until we have real images
       return [];
     }
 

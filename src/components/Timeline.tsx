@@ -382,6 +382,8 @@ export default function Timeline() {
                               fill
                               className="object-cover rounded-[32px]"
                               sizes="(max-width: 768px) 100vw, 50vw"
+                              priority={index === 0}
+                              loading={index === 0 ? undefined : 'lazy'}
                             />
                             {/* Subtle gradient overlay for better visibility */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 rounded-[32px]" />

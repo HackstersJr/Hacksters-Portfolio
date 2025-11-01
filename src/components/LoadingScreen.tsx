@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { getImagesByFolder } from '@/lib/cloudinaryImages.constants';
+import { BTS_EVENTS, PARTICIPATED_EVENTS } from '@/lib/eventsData';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -11,71 +12,204 @@ interface LoadingScreenProps {
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [loadingPhase, setLoadingPhase] = useState('Initializing...');
 
   useEffect(() => {
-    // Preload critical images including gallery images
-  // List of critical images to preload (including gallery images from DomeGallery)
-  const criticalImages = [
-    // Logo
-    'https://res.cloudinary.com/dlnvozmgw/image/upload/v1738317056/Hacksters_Logo-removebg-preview_pr8kvz.png',
-    // Gallery images from DomeGallery DEFAULT_IMAGES
-    'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large'
-  ];    let loadedCount = 0;
-    const totalImages = criticalImages.length;
+    let isMounted = true;
+    const loadedImages = new Set<string>();
 
-    const preloadImage = (src: string) => {
-      return new Promise((resolve, reject) => {
-        const img = new window.Image();
+    const preloadImage = (src: string): Promise<void> => {
+      return new Promise((resolve) => {
+        if (loadedImages.has(src)) {
+          resolve();
+          return;
+        }
+
+        const img = new Image();
         img.onload = () => {
-          loadedCount++;
-          setProgress((loadedCount / totalImages) * 100);
-          resolve(img);
+          loadedImages.add(src);
+          resolve();
         };
-        img.onerror = reject;
+        img.onerror = () => {
+          // Still resolve even on error to not block loading
+          loadedImages.add(src);
+          resolve();
+        };
         img.src = src;
       });
     };
 
-    // Preload all images
-    Promise.all(criticalImages.map(src => preloadImage(src)))
-      .then(() => {
-        // Wait for DOM to be fully ready
-        if (document.readyState === 'complete') {
-          setTimeout(() => {
-            setIsComplete(true);
-            setTimeout(() => {
-              onLoadingComplete();
-              window.scrollTo({ top: 0, behavior: 'instant' });
-            }, 800);
-          }, 500);
-        } else {
-          window.addEventListener('load', () => {
-            setTimeout(() => {
-              setIsComplete(true);
-              setTimeout(() => {
-                onLoadingComplete();
-                window.scrollTo({ top: 0, behavior: 'instant' });
-              }, 800);
-            }, 500);
+    const preloadFont = (fontFamily: string): Promise<void> => {
+      return new Promise((resolve) => {
+        if (document.fonts && document.fonts.load) {
+          document.fonts.load(`1em ${fontFamily}`).then(() => {
+            resolve();
+          }).catch(() => {
+            resolve(); // Resolve anyway if font fails
           });
+        } else {
+          resolve();
         }
-      })
-      .catch(() => {
-        // Even if some images fail, continue loading
-        setTimeout(() => {
+      });
+    };
+
+    const loadAllAssets = async () => {
+      try {
+        // Phase 1: Fetch ALL Cloudinary images that Hero will use (0-50%)
+        if (!isMounted) return;
+        setLoadingPhase('Fetching your moments...');
+        
+        // Fetch ALL your Cloudinary images (same call Hero makes)
+        const response = await fetch('/api/images?category=all&shuffle=true');
+        const result = await response.json();
+        
+        let allCloudinaryImages: string[] = [];
+        
+        if (result.success && result.data?.images) {
+          allCloudinaryImages = result.data.images
+            .filter((img: any) => img.secureUrl && img.secureUrl.trim() !== '')
+            .map((img: any) => img.secureUrl);
+        }
+
+        setLoadingPhase('Loading gallery images...');
+        
+        // Preload ALL dome gallery images (this could be 100+ images)
+        for (let i = 0; i < allCloudinaryImages.length; i++) {
+          await preloadImage(allCloudinaryImages[i]);
+          if (isMounted) {
+            const progress = (i + 1) / allCloudinaryImages.length * 40;
+            setProgress(progress);
+            
+            // Update message at milestones
+            if (progress > 10 && progress < 15) {
+              setLoadingPhase('Preparing your victories...');
+            } else if (progress > 25 && progress < 30) {
+              setLoadingPhase('Arranging memories...');
+            }
+          }
+        }
+
+        // Load first timeline event (NMAM) ScrollStack images
+        setLoadingPhase('Loading journey timeline...');
+        const firstEventImages = getImagesByFolder('Official', 'NMAM');
+        for (let i = 0; i < firstEventImages.length; i++) {
+          await preloadImage(firstEventImages[i]);
+          if (isMounted) {
+            const phase1Progress = 40 + ((i + 1) / firstEventImages.length * 10);
+            setProgress(phase1Progress);
+          }
+        }
+
+                // Load fonts early
+        setLoadingPhase('Loading custom fonts...');
+        const fonts = ['Dala Floda', 'Grafier', 'Weird Serif'];
+        for (let i = 0; i < fonts.length; i++) {
+          await preloadFont(fonts[i]);
+          if (isMounted) {
+            const fontProgress = 50 + ((i + 1) / fonts.length * 10);
+            setProgress(fontProgress);
+          }
+        }
+
+        setLoadingPhase('Initializing animations...');
+        
+        // Wait for DOM to be ready
+        await new Promise(resolve => {
+          if (document.readyState === 'complete') {
+            resolve(true);
+          } else {
+            window.addEventListener('load', () => resolve(true), { once: true });
+          }
+        });
+
+        if (isMounted) setProgress(70);
+        setLoadingPhase('Polishing the experience...');
+        
+        // Additional delay to ensure Hero component has mounted and used cached images
+        await new Promise(resolve => setTimeout(resolve, 600));
+
+        if (isMounted) setProgress(85);
+        setLoadingPhase('Applying final touches...');
+        
+        await new Promise(resolve => setTimeout(resolve, 400));
+
+        if (isMounted) setProgress(100);
+        setLoadingPhase('Ready!');
+
+        // Small delay to show 100%
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        // SHOW PAGE NOW - All critical images are ready
+        if (isMounted) {
           setIsComplete(true);
+          setLoadingPhase('Ready!');
+          
           setTimeout(() => {
             onLoadingComplete();
-            window.scrollTo({ top: 0, behavior: 'instant' });
-          }, 800);
+          }, 300);
+        }
+
+        // Continue loading remaining assets in background
+        setTimeout(async () => {
+          if (!isMounted) return;
+          
+          // Load remaining timeline events
+          const remainingEvents = [
+            { folder: 'Dizzy' },
+            { folder: 'IIST-Trivandrum' },
+            { folder: 'NEXOVATE Official' },
+            { folder: 'SheLeads' },
+            { folder: 'Srujana' },
+          ];
+
+          for (const event of remainingEvents) {
+            const images = getImagesByFolder('Official', event.folder);
+            images.forEach(src => preloadImage(src).catch(() => {}));
+            await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between events
+          }
+
+          // Load Where We've Been images
+          PARTICIPATED_EVENTS.forEach(event => {
+            const images = getImagesByFolder('BTS', event.folder);
+            images.slice(0, 4).forEach(src => preloadImage(src).catch(() => {}));
+          });
+
+          // Load first 20 BTS photos
+          const allBTSImages: string[] = [];
+          BTS_EVENTS.forEach(event => {
+            const images = getImagesByFolder('BTS', event.folder);
+            allBTSImages.push(...images);
+          });
+
+          allBTSImages.slice(0, 20).forEach(src => {
+            preloadImage(src).catch(() => {});
+          });
+
+          // Load remaining BTS images slowly
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          allBTSImages.slice(20).forEach((src, index) => {
+            setTimeout(() => {
+              preloadImage(src).catch(() => {});
+            }, index * 50); // Stagger loading
+          });
         }, 500);
-      });
+
+      } catch (error) {
+        console.error('Loading error:', error);
+        // Complete anyway to not block the site
+        if (isMounted) {
+          setProgress(100);
+          setIsComplete(true);
+          setTimeout(() => onLoadingComplete(), 500);
+        }
+      }
+    };
+
+    loadAllAssets();
+
+    return () => {
+      isMounted = false;
+    };
   }, [onLoadingComplete]);
 
   return (
@@ -84,89 +218,32 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[10000] flex items-center justify-center"
-          style={{
-            background: 'transparent',
-          }}
+          transition={{ duration: 0.5 }}
+          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-black gap-6"
         >
-          {/* Logo - SUPER BIG */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="relative w-[90vw] h-[90vh] md:w-[80vw] md:h-[80vh] max-w-[1200px] max-h-[1200px]"
-          >
-            {/* Subtle glow effect */}
-            <motion.div
-              className="absolute inset-0 rounded-full blur-3xl opacity-30"
-              animate={{
-                background: [
-                  'radial-gradient(circle, rgba(0,200,255,0.2) 0%, transparent 70%)',
-                  'radial-gradient(circle, rgba(120,80,255,0.2) 0%, transparent 70%)',
-                  'radial-gradient(circle, rgba(0,200,255,0.2) 0%, transparent 70%)',
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            />
-
-            {/* Logo fills from left to right */}
-            <div className="relative w-full h-full overflow-hidden">
-              {/* Background logo (faded) */}
-              <div className="absolute inset-0 opacity-30">
-                <Image
-                  src="https://res.cloudinary.com/dswllszlj/image/upload/v1761937846/Hacksters_Logo-removebg-preview_pr8kvz.png"
-                  alt="Hacksters Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              {/* Animated fill effect - logo reveals left to right */}
+          {/* Simple Progress Bar */}
+          <div className="w-80 max-w-[90vw]">
+            <div className="h-1 bg-neutral-800 rounded-full overflow-hidden">
               <motion.div
-                className="absolute inset-0"
-                style={{
-                  clipPath: `inset(0 ${100 - progress}% 0 0)`,
-                }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src="https://res.cloudinary.com/dswllszlj/image/upload/v1761937846/Hacksters_Logo-removebg-preview_pr8kvz.png"
-                    alt="Hacksters Logo"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                  {/* Holographic shimmer overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-                    animate={{
-                      x: ['-100%', '200%'],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Glowing edge at fill position */}
-              <motion.div
-                className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent blur-sm"
-                style={{
-                  left: `${progress}%`,
-                }}
+                className="h-full bg-white"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
               />
             </div>
-          </motion.div>
+            
+            {/* Progress Text */}
+            <div className="mt-4 text-center">
+              <p className="text-neutral-400 text-sm">
+                {loadingPhase}
+              </p>
+              <p className="text-neutral-600 text-xs mt-1">
+                {Math.round(progress)}%
+              </p>
+            </div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
-
