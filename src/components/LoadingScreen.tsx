@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getImagesByFolder } from '@/lib/cloudinaryImages.constants';
+import { getImagesByFolder, getDomeGalleryUrl } from '@/lib/cloudinaryImages.constants';
 import { BTS_EVENTS, PARTICIPATED_EVENTS } from '@/lib/eventsData';
 
 interface LoadingScreenProps {

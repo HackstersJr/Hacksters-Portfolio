@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PARTICIPATED_EVENTS } from '@/lib/eventsData';
-import { getImagesByFolder } from '@/lib/cloudinaryImages.constants';
+import { getImagesByFolder, getThumbnailUrl, getLightboxUrl } from '@/lib/cloudinaryImages.constants';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
@@ -15,7 +15,7 @@ export default function WhereWeveBeenSection() {
 
   const openGallery = (folder: string) => {
     const images = getImagesByFolder('BTS', folder);
-    setLightboxImages(images.map(src => ({ src })));
+    setLightboxImages(images.map(src => ({ src: getLightboxUrl(src) }))); // Use optimized lightbox URLs
     setLightboxOpen(true);
   };
 
@@ -77,11 +77,12 @@ export default function WhereWeveBeenSection() {
                             }`}
                           >
                             <Image
-                              src={img}
+                              src={getThumbnailUrl(img)}
                               alt={`${event.name} - Photo ${i + 1}`}
                               fill
                               className="object-cover group-hover:scale-110 transition-transform duration-500"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              loading="lazy"
                             />
                           </div>
                         ))}

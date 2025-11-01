@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Masonry from 'react-masonry-css';
 import { BTS_EVENTS, getEventsByCategory } from '@/lib/eventsData';
-import { getImagesByFolder } from '@/lib/cloudinaryImages.constants';
+import { getImagesByFolder, getThumbnailUrl, getLightboxUrl } from '@/lib/cloudinaryImages.constants';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
@@ -92,10 +92,10 @@ export default function BehindTheScenesSection() {
     // Find all photos from the same event
     const eventPhotos = filteredPhotos
       .filter(p => p.eventName === photo.eventName)
-      .map(p => ({ src: p.src }));
+      .map(p => ({ src: getLightboxUrl(p.src) })); // Use optimized lightbox URLs
     
     // Find the index of clicked photo within the event photos
-    const photoIndexInEvent = eventPhotos.findIndex(p => p.src === photo.src);
+    const photoIndexInEvent = eventPhotos.findIndex(p => p.src === getLightboxUrl(photo.src));
     
     setCurrentEventPhotos(eventPhotos);
     setLightboxIndex(photoIndexInEvent >= 0 ? photoIndexInEvent : 0);
@@ -233,12 +233,13 @@ export default function BehindTheScenesSection() {
                   <div className="relative overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20">
                     <div className="relative">
                       <Image
-                        src={photo.src}
+                        src={getThumbnailUrl(photo.src)}
                         alt={`${photo.eventName} - BTS`}
                         width={600}
                         height={800}
                         className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, 20vw"
+                        loading="lazy"
                       />
                       
                       {/* Hover Overlay */}

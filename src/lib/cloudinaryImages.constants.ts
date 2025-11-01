@@ -148,6 +148,81 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
 };
 
 /**
+ * Optimize Cloudinary image URL with transformations
+ * Reduces resolution, applies auto format/quality for faster loading and less credits
+ * 
+ * @param url - Original Cloudinary URL
+ * @param options - Optimization options
+ * @returns Optimized Cloudinary URL
+ */
+export interface CloudinaryOptimizeOptions {
+  width?: number;
+  quality?: 'auto' | 'auto:low' | 'auto:good' | 'auto:best' | number;
+  format?: 'auto' | 'webp' | 'jpg' | 'png';
+  crop?: 'fill' | 'fit' | 'scale' | 'limit';
+}
+
+export function optimizeCloudinaryUrl(
+  url: string,
+  options: CloudinaryOptimizeOptions = {}
+): string {
+  // Only process Cloudinary URLs
+  if (!url.includes('cloudinary.com')) return url;
+
+  const {
+    width = 1920, // Max width 1920px (full HD)
+    quality = 'auto:good', // Auto quality optimization
+    format = 'auto', // Auto format (WebP when supported)
+    crop = 'limit', // Don't upscale, only downscale
+  } = options;
+
+  // Build transformation string
+  const transformations = [
+    `w_${width}`,
+    `q_${quality}`,
+    `f_${format}`,
+    `c_${crop}`,
+  ].join(',');
+
+  // Insert transformations into URL
+  // Cloudinary URL format: .../upload/...
+  return url.replace('/upload/', `/upload/${transformations}/`);
+}
+
+/**
+ * Get optimized image URL for thumbnails/previews
+ */
+export function getThumbnailUrl(url: string): string {
+  return optimizeCloudinaryUrl(url, {
+    width: 800,
+    quality: 'auto:good',
+    format: 'auto',
+  });
+}
+
+/**
+ * Get optimized image URL for full-screen lightbox
+ */
+export function getLightboxUrl(url: string): string {
+  return optimizeCloudinaryUrl(url, {
+    width: 2560, // 2K max
+    quality: 'auto:good',
+    format: 'auto',
+  });
+}
+
+/**
+ * Get optimized image URL for dome gallery
+ */
+export function getDomeGalleryUrl(url: string): string {
+  return optimizeCloudinaryUrl(url, {
+    width: 600,
+    quality: 'auto',
+    format: 'auto',
+  });
+}
+
+/**
  * Helper function to get all images from a specific category
  * @param category - 'BTS' | 'Official' | 'Other'
  * @returns Array of all image URLs in that category
