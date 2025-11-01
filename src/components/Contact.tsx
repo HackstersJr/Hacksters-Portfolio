@@ -12,7 +12,7 @@ export default function Contact() {
           <div className="relative mb-12">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 fade-in-up font-chillax">
               <span className="text-white">Get In</span>{' '}
-              <span className="neon-text">Touch</span>
+              <span className="text-glow-cyan">Touch</span>
             </h2>
             <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mx-auto mb-8"></div>
           </div>

@@ -15,7 +15,7 @@ export default function About() {
                 className="text-4xl md:text-6xl font-semibold mb-4"
                 style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.01em' }}
               >
-                <span className="text-white">About</span> <span className="neon-text">Us</span>
+                <span className="text-white">About</span> <span className="text-glow-cyan">Us</span>
               </h2>
               <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-green-400 rounded-full mb-6"></div>
             </div>

@@ -163,7 +163,7 @@ export default function Team() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 fade-in-up" style={{ fontFamily: 'Grafier, sans-serif' }}>
-              <span className="text-white">Meet Our</span> <span className="neon-text">Team</span>
+              <span className="text-white">Meet Our</span> <span className="text-glow-cyan">Team</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed fade-in-up font-chillax">
               The brilliant minds behind our innovations. A diverse team of experts

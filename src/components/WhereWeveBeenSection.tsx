@@ -33,9 +33,11 @@ export default function WhereWeveBeenSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
             <span className="text-white">Where We&apos;ve </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Been</span>
+            <span className="inline-block text-glow-purple">
+              Been
+            </span>
           </h2>
           <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto">
             Events we participated in, experiences that shaped us

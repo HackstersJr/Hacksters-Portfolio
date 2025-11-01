@@ -49,7 +49,7 @@ export default function Gallery() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-                <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 neon-text fade-in-up" style={{ fontFamily: 'Grafier, sans-serif' }}>
+                <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-glow-cyan fade-in-up" style={{ fontFamily: 'Grafier, sans-serif' }}>
           Gallery
         </h2>
 

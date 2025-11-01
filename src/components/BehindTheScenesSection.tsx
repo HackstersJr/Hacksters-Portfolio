@@ -100,9 +100,11 @@ export default function BehindTheScenesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
             <span className="text-white">Behind The </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Scenes</span>
+            <span className="inline-block text-glow-cyan">
+              Scenes
+            </span>
           </h2>
           <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto">
             Candid moments from our journey

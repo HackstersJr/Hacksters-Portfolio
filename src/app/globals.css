@@ -173,7 +173,34 @@ p.font-weird {
 
 .neon-text {
   color: var(--primary);
-  text-shadow: 0 0 10px var(--primary);
+  text-shadow:
+    0 0 12px rgba(6, 182, 212, 0.8),
+    0 0 26px rgba(6, 182, 212, 0.45),
+    0 0 42px rgba(6, 182, 212, 0.3);
+}
+
+.text-glow-cyan {
+  color: #67e8f9;
+  text-shadow:
+    0 0 14px rgba(103, 232, 249, 0.75),
+    0 0 30px rgba(6, 182, 212, 0.5),
+    0 0 46px rgba(6, 182, 212, 0.28);
+}
+
+.text-glow-purple {
+  color: #d8b4fe;
+  text-shadow:
+    0 0 14px rgba(216, 180, 254, 0.75),
+    0 0 30px rgba(192, 132, 252, 0.5),
+    0 0 46px rgba(192, 132, 252, 0.28);
+}
+
+.text-glow-emerald {
+  color: #6ee7b7;
+  text-shadow:
+    0 0 14px rgba(110, 231, 183, 0.7),
+    0 0 30px rgba(16, 185, 129, 0.45),
+    0 0 46px rgba(16, 185, 129, 0.26);
 }
 
 .holographic-card {
