@@ -26,11 +26,16 @@ export interface CloudinaryImagesConfig {
 // Cloudinary images organized by category and folder
 export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
   BTS: {
-    'Dizzy Hackers': [
+    'Nasa Space Apps': [
+      // Add your Nasa Space Apps BTS images here
+    ],
+    'Dizzy Hackers BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201398/IMG-20250228-WA0029_fqcq19.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201397/IMG-20250228-WA0017_kxjuis.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761199130/IMG-20250228-WA0030_dbhjh0.jpg',
+
     ],
-    'IIST-Trivandrum': [
+    'IIST-Trivandrum BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668730/IMG20251018145630_ogxodl.heic',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668730/IMG20251019125757_01_tukg4x.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668729/IMG20251017155000_hltucs.jpg',
@@ -44,27 +49,27 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668717/_DSC7835_-_01_ujhjtu.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668714/_DSC7493_-_01_wsmckq.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668714/_DSC7792_-_01_x7u24h.jpg',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761668713/_DSC7503_-_01_tu5ltx.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761668714/_DSC7503_-_01_tu5ltx.jpg',
     ],
-    'Innovatex': [
+    'Innovatex BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201574/20250416_195451_arkgt3.heic',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201572/20250416_203859_z8vzzr.heic',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201571/20250416_205407_q0ewhb.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201568/20250416_204127_kwuxja.heic',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201567/20250416_205057_kvj6ul.heic',
     ],
-    'Iotopia': [
+    'Iotopia BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667697/IMG_6734_c8zsf3.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667696/IMG_6728_ojlrco.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667694/IMG_6710_dvb3iv.jpg',
     ],
-    'Nexovate': [
+    'NEXOVATE BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200875/WhatsApp_Image_2025-09-29_at_08.02.39_1_i3hodq.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200874/WhatsApp_Image_2025-09-29_at_08.02.37_og2gtc.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200872/WhatsApp_Image_2025-09-29_at_08.02.40_pcbe0g.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200871/WhatsApp_Image_2025-09-29_at_08.02.38_yectm8.jpg',
     ],
-    'NMAN': [
+    'NMAM BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200869/PHOTO-2025-10-02-12-36-14_wlnqip.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200867/PHOTO-2025-10-02-12-37-42_ve3rsj.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200866/PHOTO-2025-10-02-12-36-06_ra5pv9.jpg',
@@ -79,11 +84,12 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200853/PHOTO-2025-10-02-12-40-16_bmfeyv.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200852/PHOTO-2025-10-02-12-40-02_dzvaqy.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200851/PHOTO-2025-10-02-12-40-10_p0kayd.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761990888/PHOTO-2025-10-02-12-46-25_ceff4p.jpg',
     ],
-    'SheLeads': [
+    'SheLeads BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201335/IMG-20250307-WA0041_qm0zos.jpg',
     ],
-    'Srujana': [
+    'Srujana BTS': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667988/IMG_6796_g6qufj.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667985/IMG20250915153457_qyvdo5.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667985/IMG20250914175434_gdiy5h.jpg',
@@ -91,12 +97,24 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
     ],
   },
   Official: {
+    'NMAM': [
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761991006/PHOTO-2025-10-02-12-34-25_uquasl.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761991007/PHOTO-2025-10-02-12-36-23_djcgk1.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761991004/PHOTO-2025-10-02-12-34-15_ugqcq5.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761991009/PHOTO-2025-10-02-12-40-03_wi554f.jpg',
+    ],
     'Dizzy': [
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761199130/IMG-20250228-WA0030_dbhjh0.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761199129/IMG-20250228-WA0026_iyugyr.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761199129/IMG-20250228-WA0020_xhs0n8.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761199128/IMG-20250228-WA0035_zzbbsi.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761199127/IMG-20250228-WA0017_zjla8t.jpg',
+
+    ],
+    'IEEE': [
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674222/WhatsApp_Image_2025-10-28_at_23.25.08_1_azrpm0.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674232/WhatsApp_Image_2025-10-28_at_23.25.06_nplrdc.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674243/WhatsApp_Image_2025-10-28_at_23.25.08_ngabub.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674254/WhatsApp_Image_2025-10-28_at_23.25.07_tgdwth.jpg',
     ],
     'IIST-Trivandrum': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668034/IMG_8416_kjl4st.jpg',
@@ -107,7 +125,7 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668030/IMG_8366_s76vkr.heic',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668038/IMG_8426_agb04o.jpg',
     ],
-    'NEXOVATE': [
+    'NEXOVATE Official': [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200976/WhatsApp_Image_2025-09-29_at_08.02.33_tqnosd.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200979/WhatsApp_Image_2025-09-29_at_08.02.38_2_l6m8pe.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761200977/WhatsApp_Image_2025-09-29_at_08.02.43_ju8did.jpg',
@@ -125,12 +143,6 @@ export const CLOUDINARY_IMAGES: CloudinaryImagesConfig = {
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668000/IMG20250915165018_otfht1.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761667998/IMG20250915171929_j7zjtp.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668003/IMG20250915171418_rlfilw.jpg',
-    ],
-    'IEEE': [
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674222/WhatsApp_Image_2025-10-28_at_23.25.08_1_azrpm0.jpg',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674232/WhatsApp_Image_2025-10-28_at_23.25.06_nplrdc.jpg',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674243/WhatsApp_Image_2025-10-28_at_23.25.08_ngabub.jpg',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761674254/WhatsApp_Image_2025-10-28_at_23.25.07_tgdwth.jpg',
     ],
   },
 };

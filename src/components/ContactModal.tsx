@@ -82,7 +82,7 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-none">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-none overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -93,7 +93,7 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
                 damping: 30,
                 duration: 0.4 
               }}
-              className="contact-modal-card pointer-events-auto relative w-full max-w-md"
+              className="contact-modal-card pointer-events-auto relative w-full max-w-md my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Holographic Background Effect */}

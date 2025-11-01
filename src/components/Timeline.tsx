@@ -30,19 +30,27 @@ export default function Timeline() {
       imageFolder: "Srujana"
     },
     {
+      year: "2020.5",
+      title: "NMAM Achievement",
+      subtitle: "Academic Excellence",
+      description: "Remarkable achievements and milestones at NMAM, showcasing our commitment to innovation and academic excellence.",
+      side: "left" as const,
+      imageFolder: "NMAM"
+    },
+    {
       year: "2021",
       title: "Expansion & Growth",
       subtitle: "Scaling Operations",
       description: "Expanded our team and operations, establishing partnerships with leading tech companies and securing initial funding.",
-      side: "left" as const,
-      imageFolder: "NEXOVATE"
+      side: "right" as const,
+      imageFolder: "NEXOVATE Official"
     },
     {
       year: "2022",
       title: "Global Recognition",
       subtitle: "Industry Leadership",
       description: "Gained international recognition for our innovative solutions, winning prestigious awards and expanding our global presence.",
-      side: "right" as const,
+      side: "left" as const,
       imageFolder: "Dizzy"
     },
     {
@@ -50,7 +58,7 @@ export default function Timeline() {
       title: "Future Innovation",
       subtitle: "Next Chapter",
       description: "Continuing to push boundaries with advanced technologies, preparing for the next era of technological transformation.",
-      side: "left" as const,
+      side: "right" as const,
       imageFolder: "SheLeads"
     },
     {
@@ -58,7 +66,7 @@ export default function Timeline() {
       title: "Placeholder Title",
       subtitle: "Placeholder Subtitle",
       description: "Placeholder description for this achievement. Details to be added later.",
-      side: "right" as const,
+      side: "left" as const,
       imageFolder: "IEEE"
     },
   ];
@@ -356,7 +364,7 @@ export default function Timeline() {
                       itemScale={0.04}
                       itemStackDistance={25}
                       stackPosition="25%"
-                      scaleEndPosition="10%"
+                      scaleEndPosition="25%"
                       baseScale={0.88}
                       rotationAmount={1}
                       blurAmount={0}

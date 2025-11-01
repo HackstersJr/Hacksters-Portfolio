@@ -65,21 +65,21 @@ export default function Hero() {
       <div className="relative z-20 text-center px-4">
         {/* HACKSTERS - Using Righteous (BOLD, ROUNDED, FUTURISTIC) */}
         <h1 
-          className="text-7xl md:text-9xl lg:text-[12rem] font-bold mb-6 text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.6)] tracking-tight"
+          className="text-5xl sm:text-7xl md:text-9xl lg:text-[12rem] font-bold mb-4 md:mb-6 text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.6)] tracking-tight leading-none"
           style={{ fontFamily: 'var(--font-righteous), "Righteous", cursive' }}
         >
           HACKSTERS
         </h1>
-        <div className="mb-8 flex items-center justify-center gap-x-3 flex-nowrap w-full">
+        <div className="mb-6 md:mb-8 flex flex-col sm:flex-row items-center justify-center gap-x-2 md:gap-x-3 gap-y-2 w-full">
           {/* Tagline - Using Chillax (FUNKY, MODERN) with tighter letter spacing */}
           <span 
-            className="text-3xl md:text-5xl text-white font-medium drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)] whitespace-nowrap leading-none translate-y-[-4px] md:translate-y-[-6px]"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-white font-medium drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)] whitespace-nowrap leading-none sm:translate-y-[-2px] md:translate-y-[-4px] lg:translate-y-[-6px]"
             style={{ fontFamily: '"Chillax", var(--font-inter), sans-serif', letterSpacing: '-0.03em' }}
           >
             Where ideas become
           </span>
           {/* Morphing Text - Let it use its default font */}
-          <div className="inline-flex items-center justify-start w-[160px] md:w-[280px]">
+          <div className="inline-flex items-center justify-center sm:justify-start w-full sm:w-[140px] md:w-[160px] lg:w-[280px]">
             <MorphingText 
               texts={[
                 "reality",
@@ -111,7 +111,7 @@ export default function Hero() {
                 "milestones",
                 "masterpieces"
               ]}
-              className="text-cyan-400 drop-shadow-[0_4px_14px_rgba(6,182,212,0.55)] !h-12 md:!h-16 !text-3xl md:!text-5xl !leading-none !w-full !text-left"
+              className="text-cyan-400 drop-shadow-[0_4px_14px_rgba(6,182,212,0.55)] !h-8 sm:!h-10 md:!h-12 lg:!h-16 !text-xl sm:!text-2xl md:!text-3xl lg:!text-5xl !leading-none !w-full !text-center sm:!text-left"
             />
           </div>
         </div>

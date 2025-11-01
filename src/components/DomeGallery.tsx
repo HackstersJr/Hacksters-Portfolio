@@ -540,7 +540,7 @@ export default function DomeGallery({
         }
       }
     },
-    { target: mainRef, eventOptions: { passive: false } }
+    { target: mainRef, eventOptions: { passive: false }, drag: { filterTaps: true } }
   );
 
   useEffect(() => {

@@ -69,64 +69,64 @@ export default function Gallery() {
           <div className="absolute top-1/2 -left-4 w-8 h-px bg-gradient-to-r from-transparent to-cyan-400/30"></div>
           <div className="absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-l from-transparent to-purple-400/30"></div>
           
-          <div className="overflow-x-auto gallery-scroll relative">
+          <div className="overflow-x-auto gallery-scroll relative -mx-4 px-4 sm:mx-0 sm:px-0">
             {/* Scrolling indicator lines */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"></div>
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent"></div>
             
-            <div className="flex space-x-6 pb-4 relative">
-            <div className="flex-none w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up">
-              <div className="relative h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=400&h=300&fit=crop" alt="AI Healthcare Platform" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+            <div className="flex space-x-4 md:space-x-6 pb-4 relative">
+            <div className="flex-none w-72 sm:w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up active:scale-95">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=400&h=300&fit=crop" alt="AI Healthcare Platform" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
                   <span className="text-cyan-400 text-xs font-semibold tracking-wider uppercase font-chillax">Healthcare AI</span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white font-chillax">MediAI Diagnostics</h3>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white font-chillax">MediAI Diagnostics</h3>
                 <p className="text-gray-400 text-sm font-chillax">Won National AI Challenge 2020. ML platform that analyzes medical images with 95% accuracy, helping doctors detect diseases earlier.</p>
               </div>
             </div>
 
-            <div className="flex-none w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up">
-              <div className="relative h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1554474051-025697423853?w=400&h=300&fit=crop" alt="Neural Network Visualization" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+            <div className="flex-none w-72 sm:w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up active:scale-95">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1554474051-025697423853?w=400&h=300&fit=crop" alt="Neural Network Visualization" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
                   <span className="text-cyan-400 text-xs font-semibold tracking-wider uppercase font-chillax">Deep Learning</span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white font-chillax">NeuroLink Platform</h3>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white font-chillax">NeuroLink Platform</h3>
                 <p className="text-gray-400 text-sm font-chillax">Advanced neural network for financial market prediction. Used by hedge funds worldwide, achieving 87% prediction accuracy.</p>
               </div>
             </div>
 
-            <div className="flex-none w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up">
-              <div className="relative h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop" alt="Holographic AR Interface" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+            <div className="flex-none w-72 sm:w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up active:scale-95">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop" alt="Holographic AR Interface" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
                   <span className="text-cyan-400 text-xs font-semibold tracking-wider uppercase font-chillax">AR/VR Tech</span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white font-chillax">HoloLearn</h3>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white font-chillax">HoloLearn</h3>
                 <p className="text-gray-400 text-sm font-chillax">Immersive AR learning platform for STEM education. Adopted by 200+ universities, improving student engagement by 300%.</p>
               </div>
             </div>
 
-            <div className="flex-none w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up">
-              <div className="relative h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" alt="Cybersecurity Dashboard" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+            <div className="flex-none w-72 sm:w-80 holographic-card rounded-lg overflow-hidden border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-400/20 fade-in-up active:scale-95">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" alt="Cybersecurity Dashboard" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
                   <span className="text-cyan-400 text-xs font-semibold tracking-wider uppercase font-chillax">Cybersecurity</span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white font-chillax">ShieldNet</h3>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white font-chillax">ShieldNet</h3>
                 <p className="text-gray-400 text-sm font-chillax">AI-powered cybersecurity platform protecting enterprise networks. Prevents 99.7% of cyber attacks for Fortune 500 clients.</p>
               </div>
             </div>

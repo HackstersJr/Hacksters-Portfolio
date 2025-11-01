@@ -243,7 +243,7 @@
 /* Responsive Design */
 @media (max-width: 640px) {
   .contact-modal-content {
-    padding: 22px;
+    padding: 20px;
   }
 
   .contact-item {
@@ -257,15 +257,60 @@
   }
 
   .contact-item-value {
-    font-size: 14px;
+    font-size: 13px;
+    word-break: break-word;
   }
 
   .contact-item-label {
     font-size: 10px;
+  }
+
+  .contact-close-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contact-copy-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 380px) {
+  .contact-modal-content {
+    padding: 16px;
+  }
+
+  .contact-item {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .contact-item-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .contact-item-value {
+    font-size: 12px;
   }
 }
 
 /* Prevent body scroll when modal is open */
 body.modal-open {
   overflow: hidden;
+  touch-action: none;
+}
+
+/* Performance optimization */
+.contact-modal-card {
+  will-change: transform, opacity;
+}
+
+.contact-item {
+  will-change: transform, background-color;
+}
+
+.contact-item-icon {
+  will-change: transform;
 }
