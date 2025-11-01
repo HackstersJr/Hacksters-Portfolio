@@ -69,6 +69,11 @@ export default function BehindTheScenesSection() {
       photos = photos.filter(photo => photo.eventId === selectedEvent);
     }
     
+    // Randomize photos when on "All Events" tab
+    if (filter === 'all' && selectedEvent === 'all') {
+      photos = [...photos].sort(() => Math.random() - 0.5);
+    }
+    
     return photos;
   }, [allPhotos, filter, selectedEvent]);
 
