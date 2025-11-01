@@ -219,11 +219,11 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-black gap-6"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black"
         >
-          {/* Simple Progress Bar */}
-          <div className="w-80 max-w-[90vw]">
-            <div className="h-1 bg-neutral-800 rounded-full overflow-hidden">
+          {/* Centered Progress Bar */}
+          <div className="flex flex-col items-center gap-4 w-80 max-w-[90vw]">
+            <div className="w-full h-1 bg-neutral-800 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-white"
                 initial={{ width: 0 }}
@@ -233,7 +233,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             </div>
             
             {/* Progress Text */}
-            <div className="mt-4 text-center">
+            <div className="text-center">
               <p className="text-neutral-400 text-sm">
                 {loadingPhase}
               </p>
