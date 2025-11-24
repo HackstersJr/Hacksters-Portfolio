@@ -124,9 +124,9 @@ export default function BehindTheScenesSection() {
   ];
 
   return (
-    <section id="behind-the-scenes" className="relative min-h-screen py-20 px-4 bg-black">
+    <section id="behind-the-scenes" className="relative min-h-screen py-20 px-4 bg-transparent">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/10 to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/5 to-transparent pointer-events-none" />
       
       <div className="relative z-10 max-w-[1600px] mx-auto">
         {/* Section Header */}

@@ -20,9 +20,9 @@ export default function WhereWeveBeenSection() {
   };
 
   return (
-    <section id="where-weve-been" className="relative min-h-screen py-20 px-4 bg-black">
+    <section id="where-weve-been" className="relative min-h-screen py-20 px-4 bg-transparent">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/5 to-transparent pointer-events-none" />
       
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}

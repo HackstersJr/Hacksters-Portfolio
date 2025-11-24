@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Righteous } from "next/font/google";
 import Script from "next/script";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" strategy="beforeInteractive" />
       </head>
       <body className={`${inter.variable} ${righteous.variable} antialiased`}>
+        <AnimatedBackground />
         {children}
       </body>
     </html>

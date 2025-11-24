@@ -153,7 +153,7 @@ export default function Team() {
 
   return (
     <>
-      <section id="team" className="relative py-20 bg-gradient-to-b from-transparent via-gray-900/8 to-transparent overflow-hidden">
+      <section id="team" className="relative py-20 bg-transparent overflow-hidden">
         {/* Minimal Clean Background */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Very subtle single gradient orb */}

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@paper-design/shaders-react':
+        specifier: ^0.0.65
+        version: 0.0.65(@types/react@19.1.15)(react@19.1.0)
       '@react-three/fiber':
         specifier: ^9.4.0
         version: 9.4.0(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(three@0.181.2)
@@ -600,6 +603,18 @@ packages:
 
   '@open-draft/until@2.1.0':
     resolution: {integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==}
+
+  '@paper-design/shaders-react@0.0.65':
+    resolution: {integrity: sha512-938W1mHANC2uArAglhG2a60qzajlWnqKPsw5E9HUnu1vJ2d5Kne0771fR8dRL1wS0VwwFyPbOdr7mmSrdmwe8g==}
+    peerDependencies:
+      '@types/react': ^18 || ^19
+      react: ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@paper-design/shaders@0.0.65':
+    resolution: {integrity: sha512-BjOfV82yFn1jxoc6HlirHnTaafXIb7SVItGP1lK9hxmqA2f0bt6otoH/lCp9N9aLTxBivB6AwMfeZYvwOsAjTw==}
 
   '@react-three/fiber@9.4.0':
     resolution: {integrity: sha512-k4iu1R6e5D54918V4sqmISUkI5OgTw3v7/sDRKEC632Wd5g2WBtUS5gyG63X0GJO/HZUj1tsjSXfyzwrUHZl1g==}
@@ -3554,6 +3569,15 @@ snapshots:
       outvariant: 1.4.3
 
   '@open-draft/until@2.1.0': {}
+
+  '@paper-design/shaders-react@0.0.65(@types/react@19.1.15)(react@19.1.0)':
+    dependencies:
+      '@paper-design/shaders': 0.0.65
+      react: 19.1.0
+    optionalDependencies:
+      '@types/react': 19.1.15
+
+  '@paper-design/shaders@0.0.65': {}
 
   '@react-three/fiber@9.4.0(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(three@0.181.2)':
     dependencies:

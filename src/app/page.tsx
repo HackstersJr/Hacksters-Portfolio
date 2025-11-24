@@ -1,7 +1,6 @@
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
-import WhereWeveBeenSection from '@/components/WhereWeveBeenSection';
 import BehindTheScenesSection from '@/components/BehindTheScenesSection';
 import About from '@/components/About';
 import Team from '@/components/Team';
@@ -17,7 +16,6 @@ export default function Home() {
         <Nav />
         <Hero />
         <Timeline />
-        <WhereWeveBeenSection />
         <BehindTheScenesSection />
         <About />
         <Team />

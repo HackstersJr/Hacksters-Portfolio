@@ -35,7 +35,7 @@ export default function Hero() {
   }, [data]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
       {/* DomeGallery Background - Always show with fallback to default images */}
       <div className="absolute inset-0 z-0 opacity-60">
         <DomeGallery

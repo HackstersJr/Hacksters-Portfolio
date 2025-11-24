@@ -85,8 +85,14 @@ export default function TimelineSection() {
   }));
 
   return (
-    <section id="timeline" className="relative min-h-screen">
+    <section id="timeline" className="relative min-h-screen bg-transparent">
+      {/* Top transition line */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/80"></div>
+      
       <Timeline data={timelineData} />
+      
+      {/* Bottom transition line */}
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/80"></div>
     </section>
   );
 }

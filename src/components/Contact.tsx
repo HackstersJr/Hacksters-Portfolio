@@ -1,6 +1,6 @@
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-20 bg-gradient-to-t from-black via-gray-900/10 to-black overflow-hidden">
+    <section id="contact" className="relative py-20 bg-transparent overflow-hidden">
       {/* Premium Contact Background Elements - Consistent Theme */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Background elements removed for cleaner look */}
