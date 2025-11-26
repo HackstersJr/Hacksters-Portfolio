@@ -11,7 +11,7 @@ export default function AnimatedBackground() {
       {/* Mesh Gradient Base */}
       <MeshGradient
         className="w-full h-full absolute inset-0"
-        colors={["#000000", "#0a0a0a", "#0d1117", "#134e4a"]}
+        colors={["#ffffffff", "#0a0a0a", "#0d1117", "#0e2a3a"]}
         speed={speed * 0.5}
       />
 

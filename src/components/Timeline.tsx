@@ -7,53 +7,95 @@ import Image from "next/image";
 export default function TimelineSection() {
   const journeyEvents = [
     {
-      year: "2019",
-      title: "Foundation & Vision",
+      year: "18th December 2024",
+      title: "IEEE",
       subtitle: "The Beginning",
       description: "Hacksters was established with a bold vision to revolutionize technology through innovative solutions and cutting-edge research.",
-      imageFolder: "IIST-Trivandrum"
+      imageFolder: "IEEE"
     },
     {
-      year: "2020",
-      title: "First Major Breakthrough",
-      subtitle: "Innovation Milestone",
-      description: "Achieved our first significant technological breakthrough, setting the foundation for future advancements in AI and machine learning.",
-      imageFolder: "Srujana"
-    },
-    {
-      year: "2020.5",
-      title: "NMAM Achievement",
-      subtitle: "Academic Excellence",
-      description: "Remarkable achievements and milestones at NMAM, showcasing our commitment to innovation and academic excellence.",
-      imageFolder: "NMAM"
-    },
-    {
-      year: "2021",
-      title: "Expansion & Growth",
-      subtitle: "Scaling Operations",
-      description: "Expanded our team and operations, establishing partnerships with leading tech companies and securing initial funding.",
-      imageFolder: "NEXOVATE Official"
-    },
-    {
-      year: "2022",
-      title: "Global Recognition",
-      subtitle: "Industry Leadership",
-      description: "Gained international recognition for our innovative solutions, winning prestigious awards and expanding our global presence.",
+      year: "28th Feb 2025",
+      title: "Dizzy Hackers",
+      subtitle: "Presidency University",
+      description: "What started as pure chaos turned into a game-changer. our first hackathon, our first win, and the birth of Team Hacksters",
       imageFolder: "Dizzy"
     },
     {
-      year: "2023",
-      title: "Future Innovation",
-      subtitle: "Next Chapter",
-      description: "Continuing to push boundaries with advanced technologies, preparing for the next era of technological transformation.",
+      year: "7th March 2025",
+      title: "SheLeads",
+      subtitle: "Presidency University",
+      description: "Remarkable achievements and milestones at NMAM, showcasing our commitment to innovation and academic excellence.",
       imageFolder: "SheLeads"
     },
     {
-      year: "2024",
-      title: "Placeholder Title",
-      subtitle: "Placeholder Subtitle",
+      year: "18th April 2025",
+      title: "Innovatex",
+      subtitle: "Presidency University",
+      description: "Our first 24-hour hackathon tested everything — no win, but major glow-up. We learned, levelled up, and came back stronger.",
+      imageFolder: ""
+    },
+    {
+      year: "20th April 2025",
+      title: "Hackfest",
+      subtitle: "NMAM Institute of Technology, Udupi",
+      description: "This hackathon was a total glow-up — we levelled up, wowed the judges, and bagged a win that marked a new milestone for Team Hacksters.",
+      imageFolder: "NMAM"
+    },
+    {
+      year: "30th Aug 2025",
+      title: "Nexovate",
+      subtitle: "Presidency University",
+      description: "New faces, fresh vibes, and a wildcard entry — we turned our underdog story into a win. Every setback just made the comeback stronger.",
+      imageFolder: "NEXOVATE Official"
+    },
+    {
+      year: "3rd Sep 2025",
+      title: "Eureka",
+      subtitle: "Presidency University",
+      description: "A last-minute entry turned into an unforgettable win — zero prep, pure vibe, and a moment we’ll never forget.",
+      imageFolder: ""
+    },
+    {
+      year: "12th Sept 2025",
+      title: "Iotopia",
+      subtitle: "Reva University, Bengaluru",
+      description: "We gave it our all, but the win slipped away. It stung, but that loss lit a fire — turning setback into comeback.",
+      imageFolder: ""
+    },
+    {
+      year: "15th Sep 2025",
+      title: "Srujana",
+      subtitle: "Chanakya University, Bengaluru",
+      description: "After countless near-wins, we finally did it — first place, pure adrenaline, and an award from the former ISRO Chairman. Absolute peak moment.",
+      imageFolder: "Srujana"
+    },
+    {
+      year: "4th Oct 2025",
+      title: "NASA Space Apps Challenge",
+      subtitle: "Jain University, Bengaluru",
       description: "Placeholder description for this achievement. Details to be added later.",
-      imageFolder: "IEEE"
+      imageFolder: ""
+    },
+    {
+      year: "15th Oct 2025",
+      title: "Pravrutti",
+      subtitle: "Ramaiah University, Bengaluru",
+      description: "All eight of us teamed up for the first time — just vibes, no pressure. But we ended up bagging two prizes in one event. Proof that when passion meets teamwork, it just clicks.",
+      imageFolder: ""
+    },
+    {
+      year: "19th Oct 2025",
+      title: "Hackorbital",
+      subtitle: "Indian Institute of Space Science and Technology, Thiruvananthapuram, Kerala",
+      description: "Running on no sleep and pure hustle, we pushed through every round and built something we were proud of. Taking first place on that stage? An unreal high.",
+      imageFolder: "IIST-Trivandrum"
+    },
+    {
+      year: "21st Nov 2025",
+      title: "MAD Expo",
+      subtitle: "Presidency University, Bengaluru",
+      description: "Placeholder Text",
+      imageFolder: ""
     },
   ];
 

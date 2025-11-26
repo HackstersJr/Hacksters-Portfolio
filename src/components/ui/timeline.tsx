@@ -22,7 +22,22 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       const rect = ref.current.getBoundingClientRect();
       setHeight(rect.height);
     }
-  }, [ref]);
+    
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (entries[0] && ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        setHeight(rect.height);
+      }
+    });
+    
+    if (ref.current) {
+      resizeObserver.observe(ref.current);
+    }
+    
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [ref, data]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
