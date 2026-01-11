@@ -52,20 +52,17 @@ const Projects = ({
   }, [carouselApi]);
 
   return (
-    <section id="projects" className="relative py-32 bg-transparent overflow-hidden">
-      {/* Top transition line */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/80"></div>
-      
-      <div className="container mx-auto">
-        <div className="mb-8 flex items-end justify-between md:mb-14 lg:mb-16">
+    <section id="projects" className="relative py-32 md:py-40 bg-black/50 overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="mb-12 flex items-end justify-between md:mb-16">
           <div className="flex flex-col gap-4">
-            <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl text-white font-chillax">
-              <span className="text-white">Our</span>{' '}
-              <span className="text-glow-cyan" style={{ fontFamily: 'Grafier, sans-serif' }}>
-                {title}
-              </span>
+            <h2 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-white"
+              style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.02em' }}
+            >
+              {title}
             </h2>
-            <p className="max-w-lg text-gray-300 font-chillax">{description}</p>
+            <p className="max-w-lg text-gray-400 font-chillax text-lg">{description}</p>
           </div>
           <div className="hidden shrink-0 gap-2 md:flex">
             <Button
@@ -75,7 +72,7 @@ const Projects = ({
                 carouselApi?.scrollPrev();
               }}
               disabled={!canScrollPrev}
-              className="disabled:pointer-events-auto bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-400/20 hover:border-cyan-400/40 text-cyan-400"
+              className="disabled:pointer-events-auto bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-gray-400 hover:text-white"
             >
               <ArrowLeft className="size-5" />
             </Button>
@@ -86,7 +83,7 @@ const Projects = ({
                 carouselApi?.scrollNext();
               }}
               disabled={!canScrollNext}
-              className="disabled:pointer-events-auto bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-400/20 hover:border-cyan-400/40 text-cyan-400"
+              className="disabled:pointer-events-auto bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-gray-400 hover:text-white"
             >
               <ArrowRight className="size-5" />
             </Button>
@@ -116,32 +113,32 @@ const Projects = ({
                   rel="noopener noreferrer"
                   className="group rounded-xl block"
                 >
-                  <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[16/9] border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300">
+                  <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-2xl md:aspect-[5/4] lg:aspect-[16/9] border border-white/5 hover:border-white/10 transition-all duration-300 bg-neutral-950">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      className="absolute h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 h-full bg-gradient-to-b from-black/20 via-black/40 to-black/90" />
+                    <div className="absolute inset-0 h-full bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
                     
                     {/* Status badge */}
                     {item.status && (
-                      <div className="absolute top-4 right-4 px-3 py-1 text-xs font-semibold bg-cyan-500/30 backdrop-blur-sm rounded-full border border-cyan-400/50 text-cyan-300">
-                        {item.status === "live" ? "🌐 Live" : "⭐ GitHub"}
+                      <div className="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-gray-300 font-chillax">
+                        {item.status === "live" ? "Live" : "GitHub"}
                       </div>
                     )}
                     
                     <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8">
-                      <div className="mb-2 pt-4 text-xl font-semibold md:mb-3 md:pt-4 lg:pt-4 font-chillax text-glow-cyan">
+                      <h3 className="mb-2 text-xl font-semibold font-chillax">
                         {item.title}
-                      </div>
-                      <div className="mb-8 line-clamp-2 md:mb-12 lg:mb-9 text-gray-300 font-chillax">
+                      </h3>
+                      <p className="mb-6 line-clamp-2 text-gray-400 text-sm font-chillax">
                         {item.description}
-                      </div>
-                      <div className="flex items-center text-sm text-cyan-400 font-chillax">
-                        View Project{" "}
-                        <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
-                      </div>
+                      </p>
+                      <span className="flex items-center text-sm text-gray-400 group-hover:text-white font-chillax transition-colors">
+                        View Project
+                        <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </div>
                   </div>
                 </a>
@@ -153,8 +150,8 @@ const Projects = ({
           {items.map((_, index) => (
             <button
               key={index}
-              className={`h-2 w-2 rounded-full transition-colors ${
-                currentSlide === index ? "bg-cyan-400" : "bg-cyan-400/20"
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                currentSlide === index ? "bg-white w-6" : "bg-white/20 w-1.5"
               }`}
               onClick={() => carouselApi?.scrollTo(index)}
               aria-label={`Go to slide ${index + 1}`}
@@ -162,9 +159,6 @@ const Projects = ({
           ))}
         </div>
       </div>
-      
-      {/* Bottom transition line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/80"></div>
     </section>
   );
 };

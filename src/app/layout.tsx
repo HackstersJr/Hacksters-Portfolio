@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+        {/* Removed Tailwind CDN - already installed locally via npm */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" strategy="beforeInteractive" />
         <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet" />
         <Script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" strategy="beforeInteractive" />

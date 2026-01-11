@@ -36,8 +36,11 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
+      {/* Dark overlay to add depth - sits above AnimatedBackground, behind everything else */}
+      <div className="absolute inset-0 z-[-5] bg-black/30" />
+
       {/* DomeGallery Background - Always show with fallback to default images */}
-      <div className="absolute inset-0 z-0 opacity-60">
+      <div className="absolute inset-0 z-0 opacity-100">
         <DomeGallery
           images={domeImages}
           fit={0.6}
@@ -64,7 +67,7 @@ export default function Hero() {
 
       <div className="relative z-20 text-center px-4">
         {/* HACKSTERS - Using Righteous (BOLD, ROUNDED, FUTURISTIC) */}
-        <h1 
+        <h1
           className="text-5xl sm:text-7xl md:text-9xl lg:text-[12rem] font-bold mb-4 md:mb-6 text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.6)] tracking-tight leading-none"
           style={{ fontFamily: 'var(--font-righteous), "Righteous", cursive' }}
         >
@@ -72,7 +75,7 @@ export default function Hero() {
         </h1>
         <div className="mb-6 md:mb-8 flex flex-col sm:flex-row items-center justify-center gap-x-2 md:gap-x-3 gap-y-2 w-full">
           {/* Tagline - Using Chillax (FUNKY, MODERN) with tighter letter spacing */}
-          <span 
+          <span
             className="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-white font-medium drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)] whitespace-nowrap leading-none sm:translate-y-[-2px] md:translate-y-[-4px] lg:translate-y-[-6px]"
             style={{ fontFamily: '"Chillax", var(--font-inter), sans-serif', letterSpacing: '-0.03em' }}
           >
@@ -80,37 +83,19 @@ export default function Hero() {
           </span>
           {/* Morphing Text - Let it use its default font */}
           <div className="inline-flex items-center justify-center sm:justify-start w-full sm:w-[140px] md:w-[160px] lg:w-[280px]">
-            <MorphingText 
+            <MorphingText
               texts={[
                 "reality",
                 "innovations",
                 "legends",
-                "breakthroughs",
-                "winners",
                 "impact",
-                "phenomena",
-                "solutions",
-                "change",
                 "magic",
-                "inspiration",
-                "culture",
-                "progress",
-                "growth",
-                "possibilities",
-                "journeys",
-                "success",
-                "transformation",
-                "momentum",
-                "excellence",
-                "creativity",
-                "marvels",
-                "stories",
-                "energy",
+                "change",
                 "dreams",
-                "influence",
-                "milestones",
-                "masterpieces"
+                "stories",
               ]}
+              morphTime={1.2}
+              cooldownTime={2.5}
               className="text-cyan-400 drop-shadow-[0_4px_14px_rgba(6,182,212,0.55)] !h-8 sm:!h-10 md:!h-12 lg:!h-16 !text-xl sm:!text-2xl md:!text-3xl lg:!text-5xl !leading-none !w-full !text-center sm:!text-left"
             />
           </div>

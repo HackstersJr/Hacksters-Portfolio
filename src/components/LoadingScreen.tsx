@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getImagesByFolder, getDomeGalleryUrl } from '@/lib/cloudinaryImages.constants';
+import { getAllWinImages, getAllBTSImages, getEventWin, getEventBTS, getDomeGalleryUrl } from '@/lib/cloudinaryImages.constants';
 import { BTS_EVENTS, PARTICIPATED_EVENTS } from '@/lib/eventsData';
 
 interface LoadingScreenProps {
@@ -91,7 +91,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
         // Load first timeline event (NMAM) ScrollStack images
         setLoadingPhase('Loading journey timeline...');
-        const firstEventImages = getImagesByFolder('Official', 'NMAM');
+        const firstEventImages = getEventWin('5. Hackfest NMAM');
         for (let i = 0; i < firstEventImages.length; i++) {
           await preloadImage(firstEventImages[i]);
           if (isMounted) {
@@ -155,31 +155,33 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           
           // Load remaining timeline events
           const remainingEvents = [
-            { folder: 'Dizzy' },
-            { folder: 'IIST-Trivandrum' },
-            { folder: 'NEXOVATE Official' },
-            { folder: 'SheLeads' },
-            { folder: 'Srujana' },
+            { eventKey: '2. Dizzy Hackers' },
+            { eventKey: '12. Hackorbital IIST-Trivandrum' },
+            { eventKey: '6. Nexovate' },
+            { eventKey: '3. SheLeads' },
+            { eventKey: '9. Srujana Chanakya' },
           ];
 
           for (const event of remainingEvents) {
-            const images = getImagesByFolder('Official', event.folder);
+            const images = getEventWin(event.eventKey);
             images.forEach(src => preloadImage(src).catch(() => {}));
             await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between events
           }
 
           // Load Where We've Been images
+          const eventKeyMap: Record<string, string> = {
+            'Nasa Space Apps': '10. Nasa Space Apps',
+            'Innovatex BTS': '4. Innovatex',
+            'Iotopia BTS': '8. Iotopia',
+          };
           PARTICIPATED_EVENTS.forEach(event => {
-            const images = getImagesByFolder('BTS', event.folder);
+            const eventKey = eventKeyMap[event.folder];
+            const images = eventKey ? getEventBTS(eventKey) : [];
             images.slice(0, 4).forEach(src => preloadImage(src).catch(() => {}));
           });
 
           // Load first 20 BTS photos
-          const allBTSImages: string[] = [];
-          BTS_EVENTS.forEach(event => {
-            const images = getImagesByFolder('BTS', event.folder);
-            allBTSImages.push(...images);
-          });
+          const allBTSImages = getAllBTSImages();
 
           allBTSImages.slice(0, 20).forEach(src => {
             preloadImage(src).catch(() => {});

@@ -24,7 +24,7 @@ export default function Team() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const teamMembers: TeamMember[] = [
     {
-      name: "Alex Chen",
+      name: "Meghnath S",
       role: "Lead Developer",
       bio: "Full-stack developer with 8+ years of experience in AI and machine learning. Passionate about creating innovative solutions that push technological boundaries.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
@@ -38,7 +38,7 @@ export default function Team() {
       }
     },
     {
-      name: "Sarah Johnson",
+      name: "Priyodip Mukhopadhyay",
       role: "UI/UX Designer",
       bio: "Creative designer specializing in futuristic interfaces and user experiences. Expert in creating immersive digital environments that captivate users.",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
@@ -52,7 +52,7 @@ export default function Team() {
       }
     },
     {
-      name: "Marcus Rodriguez",
+      name: "Vishnu Vardhan Panchumarthi",
       role: "AI Engineer",
       bio: "PhD in Computer Science with focus on neural networks and quantum computing. Leads our research initiatives in next-generation AI technologies.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
@@ -66,7 +66,7 @@ export default function Team() {
       }
     },
     {
-      name: "Emily Zhang",
+      name: "Sai Tharun V",
       role: "Product Manager",
       bio: "Strategic thinker with expertise in tech product development. Bridges the gap between innovation and market needs, ensuring our solutions make real impact.",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
@@ -162,14 +162,15 @@ export default function Team() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 fade-in-up" style={{ fontFamily: 'Grafier, sans-serif' }}>
-              <span className="text-white">Meet Our</span> <span className="text-glow-cyan">Team</span>
+            <h2 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 fade-in-up"
+              style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.02em' }}
+            >
+              The Team
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed fade-in-up font-chillax">
-              The brilliant minds behind our innovations. A diverse team of experts
-              united by passion for technology and commitment to excellence.
+            <p className="text-lg md:text-xl text-gray-400 font-chillax fade-in-up">
+              8 people. Infinite caffeine & Mountain Dew.
             </p>
-            <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-green-400 rounded-full mx-auto mt-6"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">

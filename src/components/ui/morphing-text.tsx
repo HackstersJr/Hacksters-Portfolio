@@ -1,16 +1,29 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
-
+import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
-const morphTime = 1.5
-const cooldownTime = 0.5
+// MorphingText - Based on Magic UI
+// https://magicui.design/docs/components/morphing-text
+// Credit to @luis-code (https://luis-code.vercel.app/)
 
-const useMorphingText = (texts: string[]) => {
+interface MorphingTextProps {
+  className?: string
+  texts: string[]
+  morphTime?: number
+  cooldownTime?: number
+}
+
+let filterIdCounter = 0
+
+const useMorphingText = (
+  texts: string[],
+  morphTime: number,
+  cooldownTime: number
+) => {
   const textIndexRef = useRef(0)
   const morphRef = useRef(0)
-  const cooldownRef = useRef(0)
+  const cooldownRef = useRef(cooldownTime)
   const timeRef = useRef(new Date())
 
   const text1Ref = useRef<HTMLSpanElement>(null)
@@ -25,10 +38,7 @@ const useMorphingText = (texts: string[]) => {
       current2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`
 
       const invertedFraction = 1 - fraction
-      current1.style.filter = `blur(${Math.min(
-        8 / invertedFraction - 8,
-        100
-      )}px)`
+      current1.style.filter = `blur(${Math.min(8 / invertedFraction - 8, 100)}px)`
       current1.style.opacity = `${Math.pow(invertedFraction, 0.4) * 100}%`
 
       current1.textContent = texts[textIndexRef.current % texts.length]
@@ -53,7 +63,7 @@ const useMorphingText = (texts: string[]) => {
     if (fraction === 1) {
       textIndexRef.current++
     }
-  }, [setStyles])
+  }, [setStyles, morphTime, cooldownTime])
 
   const doCooldown = useCallback(() => {
     morphRef.current = 0
@@ -68,9 +78,30 @@ const useMorphingText = (texts: string[]) => {
 
   useEffect(() => {
     let animationFrameId: number
+    let isVisible = true
+    let lastFrameTime = 0
+    const frameInterval = 1000 / 24 // 24fps throttle
 
-    const animate = () => {
+    // Pause animation when not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? true
+      },
+      { threshold: 0 }
+    )
+
+    const container = text1Ref.current?.parentElement?.parentElement
+    if (container) observer.observe(container)
+
+    const animate = (currentTime: number) => {
       animationFrameId = requestAnimationFrame(animate)
+
+      if (!isVisible) return
+
+      // Throttle to 24fps
+      const elapsed = currentTime - lastFrameTime
+      if (elapsed < frameInterval) return
+      lastFrameTime = currentTime - (elapsed % frameInterval)
 
       const newTime = new Date()
       const dt = (newTime.getTime() - timeRef.current.getTime()) / 1000
@@ -82,22 +113,22 @@ const useMorphingText = (texts: string[]) => {
       else doCooldown()
     }
 
-    animate()
+    animate(0)
     return () => {
       cancelAnimationFrame(animationFrameId)
+      observer.disconnect()
     }
   }, [doMorph, doCooldown])
 
   return { text1Ref, text2Ref }
 }
 
-interface MorphingTextProps {
-  className?: string
+const Texts: React.FC<{
   texts: string[]
-}
-
-const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
-  const { text1Ref, text2Ref } = useMorphingText(texts)
+  morphTime: number
+  cooldownTime: number
+}> = ({ texts, morphTime, cooldownTime }) => {
+  const { text1Ref, text2Ref } = useMorphingText(texts, morphTime, cooldownTime)
   return (
     <>
       <span
@@ -112,14 +143,10 @@ const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
   )
 }
 
-const SvgFilters: React.FC = () => (
-  <svg
-    id="filters"
-    className="fixed h-0 w-0"
-    preserveAspectRatio="xMidYMid slice"
-  >
+const SvgFilters: React.FC<{ id: string }> = ({ id }) => (
+  <svg className="fixed h-0 w-0" aria-hidden="true">
     <defs>
-      <filter id="threshold">
+      <filter id={id}>
         <feColorMatrix
           in="SourceGraphic"
           type="matrix"
@@ -136,15 +163,23 @@ const SvgFilters: React.FC = () => (
 export const MorphingText: React.FC<MorphingTextProps> = ({
   texts,
   className,
-}) => (
-  <div
-    className={cn(
-      "relative mx-auto h-16 w-full max-w-screen-md text-center text-[40pt] leading-none font-bold [filter:url(#threshold)_blur(0.6px)] md:h-24 lg:text-[6rem]",
-      className
-    )}
-    style={{ fontFamily: 'var(--font-inter), sans-serif' }}
-  >
-    <Texts texts={texts} />
-    <SvgFilters />
-  </div>
-)
+  morphTime = 1.5,
+  cooldownTime = 0.5,
+}) => {
+  const [filterId] = useState(() => `threshold-${++filterIdCounter}`)
+
+  return (
+    <div
+      className={cn(
+        "relative mx-auto h-16 w-full max-w-screen-md text-center font-sans text-[40pt] leading-none font-bold md:h-24 lg:text-[6rem]",
+        className
+      )}
+      style={{ filter: `url(#${filterId}) blur(0.6px)` }}
+    >
+      <Texts texts={texts} morphTime={morphTime} cooldownTime={cooldownTime} />
+      <SvgFilters id={filterId} />
+    </div>
+  )
+}
+
+export default MorphingText

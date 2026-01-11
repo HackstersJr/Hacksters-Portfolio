@@ -2,7 +2,7 @@ import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
 import Projects from '@/components/Projects';
-import BehindTheScenesSection from '@/components/BehindTheScenesSection';
+import GallerySection from '@/components/GallerySection';
 import About from '@/components/About';
 import Team from '@/components/Team';
 import Contact from '@/components/Contact';
@@ -70,7 +70,7 @@ export default function Home() {
         <Hero />
         <Timeline />
         <Projects items={projectsData} />
-        <BehindTheScenesSection />
+        <GallerySection />
         <About />
         <Team />
         <Contact />
