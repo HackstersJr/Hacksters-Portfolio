@@ -1,13 +1,13 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Phone, Instagram, Linkedin, Github, Copy, Check, ExternalLink } from 'lucide-react';
+import { X, Mail, Phone, Linkedin, Github, Copy, Check, ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface ContactInfo {
   email?: string;
+  officialEmail?: string;
   phone?: string;
-  instagram?: string;
   linkedin?: string;
   github?: string;
 }
@@ -51,11 +51,19 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
   const contactItems = [
     {
       icon: Mail,
-      label: 'Email',
+      label: 'Personal Email',
       value: contactInfo.email,
       href: contactInfo.email ? `mailto:${contactInfo.email}` : undefined,
       copyable: true,
       color: 'cyan',
+    },
+    {
+      icon: Mail,
+      label: 'Official Email',
+      value: contactInfo.officialEmail,
+      href: contactInfo.officialEmail ? `mailto:${contactInfo.officialEmail}` : undefined,
+      copyable: true,
+      color: 'purple',
     },
     {
       icon: Phone,
@@ -64,14 +72,6 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
       href: contactInfo.phone ? `tel:${contactInfo.phone}` : undefined,
       copyable: true,
       color: 'green',
-    },
-    {
-      icon: Instagram,
-      label: 'Instagram',
-      value: contactInfo.instagram,
-      href: contactInfo.instagram ? `https://instagram.com/${contactInfo.instagram.replace('@', '')}` : undefined,
-      copyable: false,
-      color: 'pink',
     },
     {
       icon: Linkedin,
@@ -94,21 +94,21 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
   // Different animations for mobile (slide up) vs desktop (scale + fade)
   const modalVariants = isMobile
     ? {
-        initial: { y: '100%', opacity: 1 },
-        animate: { y: 0, opacity: 1 },
-        exit: { y: '100%', opacity: 1 },
-      }
+      initial: { y: '100%', opacity: 1 },
+      animate: { y: 0, opacity: 1 },
+      exit: { y: '100%', opacity: 1 },
+    }
     : {
-        initial: { opacity: 0, scale: 0.95, y: 10 },
-        animate: { opacity: 1, scale: 1, y: 0 },
-        exit: { opacity: 0, scale: 0.95, y: 10 },
-      };
+      initial: { opacity: 0, scale: 0.95, y: 10 },
+      animate: { opacity: 1, scale: 1, y: 0 },
+      exit: { opacity: 0, scale: 0.95, y: 10 },
+    };
 
   const getColorClasses = (color: string) => {
     const colors: Record<string, { icon: string; hover: string; border: string }> = {
       cyan: { icon: 'text-cyan-400', hover: 'hover:bg-cyan-400/10 hover:border-cyan-400/30', border: 'border-cyan-400/20' },
+      purple: { icon: 'text-purple-400', hover: 'hover:bg-purple-400/10 hover:border-purple-400/30', border: 'border-purple-400/20' },
       green: { icon: 'text-green-400', hover: 'hover:bg-green-400/10 hover:border-green-400/30', border: 'border-green-400/20' },
-      pink: { icon: 'text-pink-400', hover: 'hover:bg-pink-400/10 hover:border-pink-400/30', border: 'border-pink-400/20' },
       blue: { icon: 'text-blue-400', hover: 'hover:bg-blue-400/10 hover:border-blue-400/30', border: 'border-blue-400/20' },
       white: { icon: 'text-white', hover: 'hover:bg-white/10 hover:border-white/30', border: 'border-white/20' },
     };
@@ -136,16 +136,15 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
               initial="initial"
               animate="animate"
               exit="exit"
-              transition={{ 
-                type: 'spring', 
-                stiffness: 400, 
+              transition={{
+                type: 'spring',
+                stiffness: 400,
                 damping: 35,
               }}
-              className={`pointer-events-auto relative w-full ${
-                isMobile 
-                  ? 'max-h-[85vh] rounded-t-3xl' 
-                  : 'max-w-md mx-4 rounded-2xl'
-              } bg-neutral-950 border border-white/10 overflow-hidden`}
+              className={`pointer-events-auto relative w-full ${isMobile
+                ? 'max-h-[85vh] rounded-t-3xl'
+                : 'max-w-md mx-4 rounded-2xl'
+                } bg-neutral-950 border border-white/10 overflow-hidden`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Drag handle for mobile */}
@@ -160,7 +159,7 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
                 {/* Header */}
                 <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h3 
+                    <h3
                       className="text-2xl md:text-3xl font-bold text-white mb-1"
                       style={{ fontFamily: '"Dala Floda", serif' }}
                     >
@@ -185,7 +184,7 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
                     const Icon = item.icon;
                     const isCopied = copiedField === item.label;
                     const colorClasses = getColorClasses(item.color);
-                    
+
                     return (
                       <motion.div
                         key={item.label}
@@ -198,7 +197,7 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
                         <div className={`w-10 h-10 rounded-lg bg-white/5 border ${colorClasses.border} flex items-center justify-center ${colorClasses.icon} transition-colors`}>
                           <Icon className="w-5 h-5" />
                         </div>
-                        
+
                         {/* Content */}
                         <div className="flex-1 min-w-0">
                           <p className="text-[10px] uppercase tracking-wider text-gray-500 font-chillax mb-0.5">

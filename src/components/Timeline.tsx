@@ -82,7 +82,7 @@ export default function TimelineSection() {
       year: "4th Oct 2025",
       title: "NASA Space Apps Challenge",
       subtitle: "Jain University, Bengaluru",
-      description: "Placeholder description for this achievement. Details to be added later.",
+      description: "We took part in this global hackathon, working on space-focused problem statements and applying problem-solving skills under tight time constraints. The experience broadened our perspective on real-world space and Earth challenges.",
       eventKey: "10. Nasa Space Apps",
       placement: "participated" as const
     },
@@ -168,7 +168,7 @@ export default function TimelineSection() {
     <section id="timeline" className="relative min-h-screen bg-transparent">
       {/* Top transition line */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/80"></div>
-      
+
       {/* Legend */}
       <div className="absolute top-8 right-4 md:right-8 z-20 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-3 text-xs">
         <div className="space-y-1.5">
@@ -190,9 +190,9 @@ export default function TimelineSection() {
           </div>
         </div>
       </div>
-      
+
       <Timeline data={timelineData} />
-      
+
       {/* Bottom transition line */}
       <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/80"></div>
     </section>

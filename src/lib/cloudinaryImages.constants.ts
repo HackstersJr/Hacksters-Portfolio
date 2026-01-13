@@ -179,7 +179,6 @@ export const EVENTS: EventsConfig = {
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668722/IMG_8512_k9cije.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668720/939b0ca3-aef6-4500-bab9-38e8e76490b8_xgqipb.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668718/IMG_8531_orzw2a.heic',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761668718/_DSC7885_-_01_txwgqb.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668717/_DSC7435_-_01_mhidw4.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668717/_DSC7399_-_01_cx8nqx.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761668717/_DSC7835_-_01_ujhjtu.jpg',

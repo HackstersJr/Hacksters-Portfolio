@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Masonry from 'react-masonry-css';
 import { BTS_EVENTS, getEventsByCategory } from '@/lib/eventsData';
-import { getAllBTSImages, getEventBTS, getThumbnailUrl, getLightboxUrl } from '@/lib/cloudinaryImages.constants';
+import { EVENTS, getThumbnailUrl, getLightboxUrl } from '@/lib/cloudinaryImages.constants';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
@@ -56,17 +56,36 @@ export default function GallerySection() {
         'MAD Expo BTS': '13. MAD Expo',
       };
       const eventKey = eventKeyMap[event.folder];
-      const images = eventKey ? getEventBTS(eventKey) : [];
-      images.forEach(src => {
-        photos.push({
-          src,
-          eventName: event.name,
-          eventId: event.id,
-          university: event.university,
-          year: event.year,
-          category: event.category,
+      
+      if (eventKey && EVENTS[eventKey]) {
+        // Get BTS images
+        const btsImages = EVENTS[eventKey].bts || [];
+        btsImages.forEach(src => {
+          photos.push({
+            src,
+            eventName: event.name,
+            eventId: event.id,
+            university: event.university,
+            year: event.year,
+            category: event.category,
+          });
         });
-      });
+
+        // Get Win images (only if event category is 'win')
+        if (event.category === 'win') {
+          const winImages = EVENTS[eventKey].win || [];
+          winImages.forEach(src => {
+            photos.push({
+              src,
+              eventName: event.name,
+              eventId: event.id,
+              university: event.university,
+              year: event.year,
+              category: 'win',
+            });
+          });
+        }
+      }
     });
 
     return photos;

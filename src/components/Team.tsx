@@ -4,17 +4,19 @@ import { useState } from 'react';
 import ProfileCard from './ProfileCard';
 import ContactModal from './ContactModal';
 import './ContactModal.css';
+import { TEAM_IMAGES, PLACEHOLDER_AVATAR } from '@/lib/teamImages.constants';
 
 interface TeamMember {
   name: string;
+  displayName: string;
   role: string;
   bio: string;
   image: string;
   skills: string[];
   contact: {
     email?: string;
+    officialEmail?: string;
     phone?: string;
-    instagram?: string;
     linkedin?: string;
     github?: string;
   };
@@ -25,119 +27,125 @@ export default function Team() {
   const teamMembers: TeamMember[] = [
     {
       name: "Meghnath S",
-      role: "Lead Developer",
-      bio: "Full-stack developer with 8+ years of experience in AI and machine learning. Passionate about creating innovative solutions that push technological boundaries.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      displayName: "Meghnath",
+      role: "Lead Developer & Technical Architect",
+      bio: "Full-stack developer passionate about AI and machine learning. Creates innovative solutions that push technological boundaries.",
+      image: TEAM_IMAGES.meghnath,
       skills: ["React", "Node.js", "Python", "AI/ML"],
       contact: {
-        email: "alex.chen@hacksters.dev",
-        phone: "+1 (555) 123-4567",
-        instagram: "@alexchen.dev",
-        linkedin: "https://linkedin.com/in/alexchen",
-        github: "@alexchen"
+        email: "meghnath.s.official@gmail.com",
+        officialEmail: "meghnath.20231CAI0074@presidencyuniversity.in",
+        phone: "+91 9620992377",
+        linkedin: "https://www.linkedin.com/in/meghnath-s/",
+        github: "Blunistark"
       }
     },
     {
       name: "Priyodip Mukhopadhyay",
-      role: "UI/UX Designer",
-      bio: "Creative designer specializing in futuristic interfaces and user experiences. Expert in creating immersive digital environments that captivate users.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-      skills: ["Figma", "Adobe XD", "3D Design", "Motion Graphics"],
+      displayName: "Priyodip",
+      role: "Backend Engineer",
+      bio: "Backend specialist with expertise in building scalable server architectures and robust APIs.",
+      image: TEAM_IMAGES.priyodip,
+      skills: ["Node.js", "Python", "APIs", "Databases"],
       contact: {
-        email: "sarah.j@hacksters.dev",
-        phone: "+1 (555) 234-5678",
-        instagram: "@sarahdesigns",
-        linkedin: "https://linkedin.com/in/sarahjohnson",
-        github: "@sarahjohnson"
+        email: "priyodip1304@gmail.com",
+        officialEmail: "priyodip.20231CAI0149@presidencyuniversity.in",
+        phone: "+91 9592550219",
+        linkedin: "https://www.linkedin.com/in/priyodip-mukhopadhyay-13o4/",
+        github: "Priyo13o4"
       }
     },
     {
       name: "Vishnu Vardhan Panchumarthi",
-      role: "AI Engineer",
-      bio: "PhD in Computer Science with focus on neural networks and quantum computing. Leads our research initiatives in next-generation AI technologies.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      skills: ["TensorFlow", "PyTorch", "Quantum Computing", "Research"],
+      displayName: "Vishnu",
+      role: "Frontend Engineer & UI/UX Designer",
+      bio: "Frontend developer and UI/UX designer crafting beautiful, intuitive interfaces and seamless user experiences.",
+      image: TEAM_IMAGES.vishnu,
+      skills: ["React", "TypeScript", "Figma", "UI/UX"],
       contact: {
-        email: "marcus.r@hacksters.dev",
-        phone: "+1 (555) 345-6789",
-        instagram: "@marcusai",
-        linkedin: "https://linkedin.com/in/marcusrodriguez",
-        github: "@marcusrodriguez"
+        email: "vishnuuu24@gmail.com",
+        officialEmail: "vishnu.20231CAI0141@presidencyuniversity.in",
+        phone: "+91 8550002529",
+        linkedin: "https://www.linkedin.com/in/vishnuuu24",
+        github: "Vishnuuuu24"
       }
     },
     {
       name: "Sai Tharun V",
-      role: "Product Manager",
-      bio: "Strategic thinker with expertise in tech product development. Bridges the gap between innovation and market needs, ensuring our solutions make real impact.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-      skills: ["Product Strategy", "Agile", "Data Analysis", "Leadership"],
+      displayName: "Tharun",
+      role: "Software Developer",
+      bio: "Versatile software developer bridging innovation and practical solutions with clean, efficient code.",
+      image: TEAM_IMAGES.tharun,
+      skills: ["Python", "Java", "Problem Solving", "Algorithms"],
       contact: {
-        email: "emily.zhang@hacksters.dev",
-        phone: "+1 (555) 456-7890",
-        instagram: "@emilypm",
-        linkedin: "https://linkedin.com/in/emilyzhang",
-        github: "@emilyzhang"
+        email: "st308762@gmail.com",
+        officialEmail: "sai.20231CAI0118@presidencyuniversity.in",
+        phone: "+91 9019886385",
+        github: "tharun-guy"
       }
     },
     {
-      name: "David Kim",
-      role: "Cybersecurity Expert",
-      bio: "Former NSA analyst turned entrepreneur. Protects our digital assets and ensures the security of our cutting-edge technologies.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-      skills: ["Cybersecurity", "Cryptography", "Risk Assessment", "Compliance"],
+      name: "Vivek Rajendra Patel",
+      displayName: "Vivek",
+      role: "Full-Stack Developer",
+      bio: "Full-stack developer building end-to-end solutions with expertise across the entire tech stack.",
+      image: TEAM_IMAGES.vivek,
+      skills: ["React", "Node.js", "MongoDB", "Full-Stack"],
       contact: {
-        email: "david.kim@hacksters.dev",
-        phone: "+1 (555) 567-8901",
-        instagram: "@davidcyber",
-        linkedin: "https://linkedin.com/in/davidkim",
-        github: "@davidkim"
+        email: "vivekpatel1735@gmail.com",
+        officialEmail: "vivek.20231CAI0057@presidencyuniversity.in",
+        phone: "+91 9741405332",
+        linkedin: "https://www.linkedin.com/in/vivek-patel-bangalore/",
+        github: "WeWake1"
       }
     },
     {
-      name: "Lisa Thompson",
-      role: "Data Scientist",
-      bio: "Data wizard who turns complex datasets into actionable insights. Specializes in predictive analytics and machine learning model optimization.",
-      image: "https://via.placeholder.com/300x300/6366f1/ffffff?text=Avatar",
-      skills: ["Python", "R", "Big Data", "Statistics"],
+      name: "Devanandana S",
+      displayName: "Devanandana",
+      role: "Product Strategist & Pitch Lead",
+      bio: "Strategic product visionary who transforms ideas into compelling pitches and market-ready solutions.",
+      image: TEAM_IMAGES.devanandana,
+      skills: ["Product Strategy", "Pitching", "Market Analysis", "Leadership"],
       contact: {
-        email: "lisa.t@hacksters.dev",
-        phone: "+1 (555) 678-9012",
-        instagram: "@lisadata",
-        linkedin: "https://linkedin.com/in/lisathompson",
-        github: "@lisathompson"
+        email: "sdevanandana1@gmail.com",
+        officialEmail: "devanandana.20231CAI0126@presidencyuniversity.in",
+        phone: "+91 8296215915",
+        linkedin: "https://www.linkedin.com/in/devanandana-s-401677294/",
+        github: "DevanandanaS"
       }
     },
     {
-      name: "Jordan Lee",
-      role: "DevOps Engineer",
-      bio: "Infrastructure maestro ensuring seamless deployment and scaling. Expert in cloud architecture and automation for high-performance systems.",
-      image: "https://via.placeholder.com/300x300/6366f1/ffffff?text=Avatar",
-      skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+      name: "V Vedha",
+      displayName: "Vedha",
+      role: "Research & Presentation Associate",
+      bio: "Research specialist crafting compelling presentations that communicate complex ideas with clarity.",
+      image: TEAM_IMAGES.vedha,
+      skills: ["Research", "Presentations", "Documentation", "Communication"],
       contact: {
-        email: "jordan.lee@hacksters.dev",
-        phone: "+1 (555) 789-0123",
-        instagram: "@jordandevops",
-        linkedin: "https://linkedin.com/in/jordanlee",
-        github: "@jordanlee"
+        email: "vedhav275@gmail.com",
+        officialEmail: "vedha.20231CAI0131@presidencyuniversity.in",
+        phone: "+91 7624817889",
+        linkedin: "https://www.linkedin.com/in/v-vedha-0976v/",
+        github: "ved-24-2006"
       }
     },
     {
-      name: "Taylor Morgan",
-      role: "UX Researcher",
-      bio: "Human-centered design advocate who bridges user needs with technical possibilities. Conducts insightful research to create meaningful digital experiences.",
-      image: "https://via.placeholder.com/300x300/6366f1/ffffff?text=Avatar",
-      skills: ["User Research", "Usability Testing", "Analytics", "Psychology"],
+      name: "Kinshue Priya M",
+      displayName: "Kinshuepriya",
+      role: "Project & Research Associate",
+      bio: "Project coordinator driving research initiatives and ensuring seamless team collaboration.",
+      image: TEAM_IMAGES.kinshuepriya,
+      skills: ["Project Management", "Research", "Coordination", "Analysis"],
       contact: {
-        email: "taylor.m@hacksters.dev",
-        phone: "+1 (555) 890-1234",
-        instagram: "@taylorux",
-        linkedin: "https://linkedin.com/in/taylormorgan",
-        github: "@taylormorgan"
+        email: "kinshuepriya.456@gmail.com",
+        officialEmail: "kinshue.20231CAI0132@presidencyuniversity.in",
+        phone: "+91 7676432568",
+        github: "Kinshuepriya"
       }
     }
   ];
 
-  const placeholderAvatar = "https://via.placeholder.com/300x300/6366f1/ffffff?text=Avatar";
+  // Placeholder avatar now managed in teamImages.constants.ts
 
   const handleContactClick = (member: TeamMember) => {
     setSelectedMember(member);
@@ -162,7 +170,7 @@ export default function Team() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 
+            <h2
               className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 fade-in-up"
               style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.02em' }}
             >
@@ -177,12 +185,12 @@ export default function Team() {
             {teamMembers.map((member, index) => (
               <div key={index} className="fade-in-up">
                 <ProfileCard
-                  name={member.name}
+                  name={member.displayName}
                   title={member.role}
                   handle={member.name.toLowerCase().replace(/\s+/g, '')}
                   status="Online"
                   contactText="Contact"
-                  avatarUrl={placeholderAvatar}
+                  avatarUrl={member.image}
                   showUserInfo={true}
                   enableTilt={true}
                   enableMobileTilt={false}
