@@ -77,11 +77,14 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
         setLoadingPhase('Loading gallery images...');
 
-        // Preload ALL dome gallery images (this could be 100+ images)
-        for (let i = 0; i < allCloudinaryImages.length; i++) {
-          await preloadImage(allCloudinaryImages[i]);
+        // Only preload first 25 images for speed - rest will load lazily
+        const PRELOAD_LIMIT = 25;
+        const imagesToPreload = allCloudinaryImages.slice(0, PRELOAD_LIMIT);
+
+        for (let i = 0; i < imagesToPreload.length; i++) {
+          await preloadImage(imagesToPreload[i]);
           if (isMounted) {
-            const progress = (i + 1) / allCloudinaryImages.length * 40;
+            const progress = (i + 1) / imagesToPreload.length * 40;
             setProgress(progress);
 
             // Update message at milestones
@@ -91,6 +94,15 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               setLoadingPhase('Arranging memories...');
             }
           }
+        }
+
+        // Preload remaining images in background (non-blocking)
+        if (allCloudinaryImages.length > PRELOAD_LIMIT) {
+          setTimeout(() => {
+            allCloudinaryImages.slice(PRELOAD_LIMIT).forEach((src, index) => {
+              setTimeout(() => preloadImage(src).catch(() => { }), index * 50);
+            });
+          }, 1000);
         }
 
         // Load first timeline event (NMAM) ScrollStack images
