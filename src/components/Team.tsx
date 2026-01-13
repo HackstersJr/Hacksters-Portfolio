@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ProfileCard from './ProfileCard';
 import ContactModal from './ContactModal';
 import './ContactModal.css';
-import { TEAM_IMAGES, PLACEHOLDER_AVATAR } from '@/lib/teamImages.constants';
+import { TEAM_IMAGES } from '@/lib/teamImages.constants';
 
 interface TeamMember {
   name: string;

@@ -140,7 +140,7 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
 
   // First pass: try to place unique images without adjacency conflicts
   const availableImages = [...normalizedImages];
-  const usedPositions = new Set<string>();
+  const _usedPositions = new Set<string>();
 
   for (let attempt = 0; attempt < totalSlots * 2; attempt++) { // Multiple attempts to find valid placements
     let placedSomething = false;

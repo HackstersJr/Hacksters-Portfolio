@@ -3,6 +3,13 @@
 import React, { ReactNode, useLayoutEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
 
+interface TransformState {
+  translateY: number;
+  scale: number;
+  rotation: number;
+  blur: number;
+}
+
 export interface ScrollStackItemProps {
   itemClassName?: string;
   children: ReactNode;
@@ -56,7 +63,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const animationFrameRef = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const cardsRef = useRef<HTMLElement[]>([]);
-  const lastTransformsRef = useRef(new Map<number, any>());
+  const lastTransformsRef = useRef(new Map<number, TransformState>());
   const isUpdatingRef = useRef(false);
 
   const calculateProgress = useCallback((scrollTop: number, start: number, end: number) => {
@@ -123,10 +130,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
-      
+
       // For the last card, limit how far it can scroll to keep it in view
       const isLastCard = i === cardsRef.current.length - 1;
-      const pinEnd = isLastCard 
+      const pinEnd = isLastCard
         ? endElementTop - containerHeight + (containerHeight * 0.4) // Keep last card visible
         : endElementTop - containerHeight / 2;
 

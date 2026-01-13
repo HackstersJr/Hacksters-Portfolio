@@ -1,6 +1,5 @@
 "use client";
 import {
-  useMotionValueEvent,
   useScroll,
   useTransform,
   motion,
@@ -22,18 +21,18 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       const rect = ref.current.getBoundingClientRect();
       setHeight(rect.height);
     }
-    
+
     const resizeObserver = new ResizeObserver((entries) => {
       if (entries[0] && ref.current) {
         const rect = ref.current.getBoundingClientRect();
         setHeight(rect.height);
       }
     });
-    
+
     if (ref.current) {
       resizeObserver.observe(ref.current);
     }
-    
+
     return () => {
       resizeObserver.disconnect();
     };
@@ -53,7 +52,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 
+        <h2
           className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
           style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.02em' }}
         >

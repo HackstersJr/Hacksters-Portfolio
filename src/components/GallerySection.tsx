@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Masonry from 'react-masonry-css';
-import { BTS_EVENTS, getEventsByCategory } from '@/lib/eventsData';
+import { BTS_EVENTS } from '@/lib/eventsData';
 import { EVENTS, getThumbnailUrl, getLightboxUrl } from '@/lib/cloudinaryImages.constants';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -56,7 +56,7 @@ export default function GallerySection() {
         'MAD Expo BTS': '13. MAD Expo',
       };
       const eventKey = eventKeyMap[event.folder];
-      
+
       if (eventKey && EVENTS[eventKey]) {
         // Get BTS images
         const btsImages = EVENTS[eventKey].bts || [];
@@ -124,7 +124,7 @@ export default function GallerySection() {
     640: 2,
   };
 
-  const openLightbox = (photo: PhotoData, index: number) => {
+  const openLightbox = (photo: PhotoData, _index: number) => {
     // Find all photos from the same event
     const eventPhotos = filteredPhotos
       .filter(p => p.eventName === photo.eventName)
@@ -170,7 +170,7 @@ export default function GallerySection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 
+          <h2
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
             style={{ fontFamily: '"Dala Floda", serif', letterSpacing: '-0.02em' }}
           >
@@ -194,8 +194,8 @@ export default function GallerySection() {
               key={btn.value}
               onClick={() => handleFilterChange(btn.value)}
               className={`px-5 py-2.5 rounded-full font-chillax text-sm font-medium transition-all duration-200 ${filter === btn.value
-                  ? 'bg-white text-black'
-                  : 'bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 hover:text-white'
+                ? 'bg-white text-black'
+                : 'bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 hover:text-white'
                 }`}
             >
               {btn.label}
@@ -217,8 +217,8 @@ export default function GallerySection() {
             <button
               onClick={() => handleEventChange('all')}
               className={`px-4 py-2 rounded-full text-sm font-chillax font-medium transition-all duration-200 ${selectedEvent === 'all'
-                  ? 'bg-white/10 text-white border border-white/20'
-                  : 'bg-transparent text-gray-400 border border-white/5 hover:border-white/10 hover:text-gray-200'
+                ? 'bg-white/10 text-white border border-white/20'
+                : 'bg-transparent text-gray-400 border border-white/5 hover:border-white/10 hover:text-gray-200'
                 }`}
             >
               All {filter === 'win' ? 'Wins' : 'Participated'}
@@ -228,8 +228,8 @@ export default function GallerySection() {
                 key={event.id}
                 onClick={() => handleEventChange(event.id)}
                 className={`px-4 py-2 rounded-full text-sm font-chillax font-medium transition-all duration-200 ${selectedEvent === event.id
-                    ? 'bg-white/10 text-white border border-white/20'
-                    : 'bg-transparent text-gray-400 border border-white/5 hover:border-white/10 hover:text-gray-200'
+                  ? 'bg-white/10 text-white border border-white/20'
+                  : 'bg-transparent text-gray-400 border border-white/5 hover:border-white/10 hover:text-gray-200'
                   }`}
               >
                 {event.name}

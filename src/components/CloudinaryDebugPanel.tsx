@@ -10,7 +10,7 @@ import { useState } from 'react';
 export default function CloudinaryDebugPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState<'all' | 'bts' | 'official'>('all');
-  
+
   const { data, loading, error } = useCloudinaryImages({
     category,
     shuffle: false,
@@ -65,7 +65,7 @@ export default function CloudinaryDebugPanel() {
               <label className="block text-sm text-white/60 mb-2">Filter by Category</label>
               <select
                 value={category}
-                onChange={(e) => setCategory(e.target.value as any)}
+                onChange={(e) => setCategory(e.target.value as 'all' | 'bts' | 'official')}
                 className="w-full bg-white/5 border border-white/10 text-white rounded px-3 py-2 text-sm"
               >
                 <option value="all">All Images</option>
@@ -93,7 +93,7 @@ export default function CloudinaryDebugPanel() {
                 <div className="text-sm text-white/60">
                   Showing {data.images.length} images
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-2">
                   {data.images.map((img) => (
                     <div
@@ -109,9 +109,8 @@ export default function CloudinaryDebugPanel() {
                         <div className="text-xs text-white/80 font-mono truncate">
                           {img.publicId.split('/').pop()}
                         </div>
-                        <div className={`text-xs mt-1 ${
-                          img.category === 'BTS' ? 'text-purple-400' : 'text-pink-400'
-                        }`}>
+                        <div className={`text-xs mt-1 ${img.category === 'BTS' ? 'text-purple-400' : 'text-pink-400'
+                          }`}>
                           {img.category}
                         </div>
                         <div className="text-xs text-white/40">

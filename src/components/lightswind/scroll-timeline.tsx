@@ -6,7 +6,6 @@ import {
   useScroll,
   useTransform,
   useSpring,
-  MotionValue,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -74,7 +73,6 @@ export const ScrollTimeline = ({
   animationOrder = "sequential",
   cardAlignment = "alternating",
   lineColor = "bg-primary/30",
-  activeColor = "bg-primary",
   progressIndicator = true,
   cardVariant = "default",
   cardEffect = "none",
@@ -87,7 +85,6 @@ export const ScrollTimeline = ({
   connectorStyle = "line",
   perspective = false,
   darkMode = false,
-  smoothScroll = true,
 }: ScrollTimelineProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -105,6 +102,13 @@ export const ScrollTimeline = ({
   });
 
   const progressHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+
+  // Define yOffset at component level (not inside map callback)
+  const yOffset = useTransform(
+    smoothProgress,
+    [0, 1],
+    [parallaxIntensity * 100, -parallaxIntensity * 100]
+  );
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((v) => {
@@ -125,8 +129,8 @@ export const ScrollTimeline = ({
       animationOrder === "simultaneous"
         ? 0
         : animationOrder === "staggered"
-        ? index * 0.2
-        : index * 0.3;
+          ? index * 0.2
+          : index * 0.3;
 
     const initialStates = {
       fade: { opacity: 0, y: 20 },
@@ -135,10 +139,10 @@ export const ScrollTimeline = ({
           cardAlignment === "left"
             ? -100
             : cardAlignment === "right"
-            ? 100
-            : index % 2 === 0
-            ? -100
-            : 100,
+              ? 100
+              : index % 2 === 0
+                ? -100
+                : 100,
         opacity: 0,
       },
       scale: { scale: 0.8, opacity: 0 },
@@ -203,11 +207,8 @@ export const ScrollTimeline = ({
           ? "lg:mr-[calc(50%+20px)]"
           : "lg:ml-[calc(50%+20px)]"
         : cardAlignment === "left"
-        ? "lg:mr-auto lg:ml-0"
-        : "lg:ml-auto lg:mr-0";
-    const perspectiveClass = perspective
-      ? "transform transition-transform hover:rotate-y-1 hover:rotate-x-1"
-      : "";
+          ? "lg:mr-auto lg:ml-0"
+          : "lg:ml-auto lg:mr-0";
 
     return cn(
       baseClasses,
@@ -302,11 +303,6 @@ export const ScrollTimeline = ({
 
           <div className="relative z-20">
             {events.map((event, index) => {
-              const yOffset = useTransform(
-                smoothProgress,
-                [0, 1],
-                [parallaxIntensity * 100, -parallaxIntensity * 100]
-              );
               return (
                 <div
                   key={event.id || index}
@@ -321,8 +317,8 @@ export const ScrollTimeline = ({
                         ? "lg:justify-start"
                         : "lg:flex-row-reverse lg:justify-start"
                       : cardAlignment === "left"
-                      ? "lg:justify-start"
-                      : "lg:flex-row-reverse lg:justify-start"
+                        ? "lg:justify-start"
+                        : "lg:flex-row-reverse lg:justify-start"
                   )}
                 >
                   <div
@@ -341,13 +337,13 @@ export const ScrollTimeline = ({
                       animate={
                         index <= activeIndex
                           ? {
-                              scale: [1, 1.3, 1],
-                              boxShadow: [
-                                "0 0 0px rgba(99,102,241,0)",
-                                "0 0 12px rgba(99,102,241,0.6)",
-                                "0 0 0px rgba(99,102,241,0)",
-                              ],
-                            }
+                            scale: [1, 1.3, 1],
+                            boxShadow: [
+                              "0 0 0px rgba(99,102,241,0)",
+                              "0 0 12px rgba(99,102,241,0.6)",
+                              "0 0 0px rgba(99,102,241,0)",
+                            ],
+                          }
                           : {}
                       }
                       transition={{

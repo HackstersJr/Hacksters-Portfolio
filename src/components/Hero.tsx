@@ -12,9 +12,6 @@ export default function Hero() {
     shuffle: true,
   });
 
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   // Map Cloudinary images to DomeGallery format - ONLY use actual images
   const domeImages = useMemo(() => {

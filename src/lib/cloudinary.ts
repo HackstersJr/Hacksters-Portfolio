@@ -1,5 +1,13 @@
 import { v2 as cloudinary } from 'cloudinary';
 
+interface CloudinaryApiResource {
+  public_id: string;
+  width: number;
+  height: number;
+  format: string;
+  folder?: string;
+}
+
 // Configure Cloudinary - moved to individual functions to ensure env vars are loaded
 function configureCloudinary() {
   if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
@@ -35,10 +43,10 @@ async function fetchImagesFromFolder(folderPath: string): Promise<CloudinaryImag
 
     // First, get all subfolders
     let allImages: CloudinaryImage[] = [];
-    
+
     try {
       const subfolders = await cloudinary.api.sub_folders(folderPath);
-      
+
       // Fetch images from each subfolder
       if (subfolders.folders && subfolders.folders.length > 0) {
         for (const subfolder of subfolders.folders) {
@@ -48,9 +56,9 @@ async function fetchImagesFromFolder(folderPath: string): Promise<CloudinaryImag
             max_results: 500,
             resource_type: 'image',
           });
-          
+
           if (result.resources && result.resources.length > 0) {
-            const images = result.resources.map((resource: any) => {
+            const images = result.resources.map((resource: CloudinaryApiResource) => {
               const optimizedUrl = getOptimizedImageUrl(resource.public_id, {
                 width: 600,
                 height: 450,
@@ -69,15 +77,15 @@ async function fetchImagesFromFolder(folderPath: string): Promise<CloudinaryImag
                 category: folderPath.includes('BTS') ? 'BTS' : 'Official',
               };
             });
-            
+
             allImages = allImages.concat(images);
           }
         }
       }
-    } catch (subfolderError) {
+    } catch {
       // No subfolders, try direct images
     }
-    
+
     // Also try to get images directly in the folder (not in subfolders)
     try {
       const directResult = await cloudinary.api.resources({
@@ -86,9 +94,9 @@ async function fetchImagesFromFolder(folderPath: string): Promise<CloudinaryImag
         max_results: 500,
         resource_type: 'image',
       });
-      
+
       if (directResult.resources && directResult.resources.length > 0) {
-        const directImages = directResult.resources.map((resource: any) => {
+        const directImages = directResult.resources.map((resource: CloudinaryApiResource) => {
           const optimizedUrl = getOptimizedImageUrl(resource.public_id, {
             width: 600,
             height: 450,
@@ -107,15 +115,15 @@ async function fetchImagesFromFolder(folderPath: string): Promise<CloudinaryImag
             category: folderPath.includes('BTS') ? 'BTS' : 'Official',
           };
         });
-        
+
         allImages = allImages.concat(directImages);
       }
-    } catch (directError) {
+    } catch {
       // No direct images
     }
-    
+
     return allImages;
-    
+
   } catch (error) {
     console.error(`Error fetching images from ${folderPath}:`, error instanceof Error ? error.message : 'Unknown error');
     return [];
@@ -130,7 +138,7 @@ export async function getBTSImages(): Promise<CloudinaryImage[]> {
   // For now, fetch all images from root
   // TODO: When images are properly organized in folders, uncomment this:
   // return fetchImagesFromFolder('BTS');
-  
+
   return fetchAllImagesFromRoot('BTS');
 }
 
@@ -141,7 +149,7 @@ export async function getOfficialImages(): Promise<CloudinaryImage[]> {
   // For now, fetch all images from root
   // TODO: When images are properly organized in folders, uncomment this:
   // return fetchImagesFromFolder('Official(Win)');
-  
+
   return fetchAllImagesFromRoot('Official');
 }
 
@@ -159,13 +167,13 @@ async function fetchAllImagesFromRoot(category: 'BTS' | 'Official'): Promise<Clo
       max_results: 500,
       resource_type: 'image',
     });
-    
+
     if (!result.resources || result.resources.length === 0) {
       return [];
     }
 
     // Map all images with optimized URLs
-    return result.resources.map((resource: any) => {
+    return result.resources.map((resource: CloudinaryApiResource) => {
       const optimizedUrl = getOptimizedImageUrl(resource.public_id, {
         width: 600,
         height: 450,
@@ -251,9 +259,9 @@ export function getOptimizedImageUrl(
 
   return cloudinary.url(publicId, {
     transformation: [
-      { 
-        width, 
-        height, 
+      {
+        width,
+        height,
         crop: 'fill',
         gravity: 'auto',
         fetch_format: format,

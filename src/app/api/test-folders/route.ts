@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 
+interface CloudinaryResource {
+  public_id: string;
+  folder?: string;
+}
+
+interface CloudinaryFolder {
+  path: string;
+}
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -11,7 +20,7 @@ cloudinary.config({
 export async function GET() {
   try {
     console.log('🔍 Testing different folder paths...');
-    
+
     // Test 1: Get ALL images from entire account
     console.log('\n=== Test 1: Get ALL images (no folder filter) ===');
     try {
@@ -23,14 +32,14 @@ export async function GET() {
       console.log('Total images in account:', allImages.resources?.length || 0);
       if (allImages.resources && allImages.resources.length > 0) {
         console.log('Sample images:');
-        allImages.resources.slice(0, 5).forEach((img: any) => {
+        allImages.resources.slice(0, 5).forEach((img: CloudinaryResource) => {
           console.log(`  - ${img.public_id} (folder: ${img.folder || 'root'})`);
         });
       }
     } catch (e) {
       console.log('Error getting all images:', e instanceof Error ? e.message : e);
     }
-    
+
     // Test 2: Try searching by tag
     console.log('\n=== Test 2: List all tags ===');
     try {
@@ -39,12 +48,12 @@ export async function GET() {
     } catch (e) {
       console.log('Tags error:', e instanceof Error ? e.message : e);
     }
-    
+
     // Test 3: Root folders
     console.log('\n=== Test 3: List root folders ===');
     const rootFolders = await cloudinary.api.root_folders();
-    console.log('Root folders:', rootFolders.folders?.map((f: any) => f.path) || []);
-    
+    console.log('Root folders:', rootFolders.folders?.map((f: CloudinaryFolder) => f.path) || []);
+
     // Test 4: Check specific public_id from your URL
     console.log('\n=== Test 4: Check specific image ===');
     try {
@@ -59,7 +68,7 @@ export async function GET() {
     } catch (e) {
       console.log('Specific image error:', e instanceof Error ? e.message : e);
     }
-    
+
     return NextResponse.json({
       success: true,
       message: 'Check terminal logs for detailed results',

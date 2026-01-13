@@ -2,8 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getAllWinImages, getAllBTSImages, getEventWin, getEventBTS, getDomeGalleryUrl } from '@/lib/cloudinaryImages.constants';
-import { BTS_EVENTS, PARTICIPATED_EVENTS } from '@/lib/eventsData';
+import { getAllBTSImages, getEventWin, getEventBTS } from '@/lib/cloudinaryImages.constants';
+import { PARTICIPATED_EVENTS } from '@/lib/eventsData';
+
+interface CloudinaryImage {
+  secureUrl: string;
+}
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -58,28 +62,28 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         // Phase 1: Fetch ALL Cloudinary images that Hero will use (0-50%)
         if (!isMounted) return;
         setLoadingPhase('Fetching your moments...');
-        
+
         // Fetch ALL your Cloudinary images (same call Hero makes)
         const response = await fetch('/api/images?category=all&shuffle=true');
         const result = await response.json();
-        
+
         let allCloudinaryImages: string[] = [];
-        
+
         if (result.success && result.data?.images) {
           allCloudinaryImages = result.data.images
-            .filter((img: any) => img.secureUrl && img.secureUrl.trim() !== '')
-            .map((img: any) => img.secureUrl);
+            .filter((img: CloudinaryImage) => img.secureUrl && img.secureUrl.trim() !== '')
+            .map((img: CloudinaryImage) => img.secureUrl);
         }
 
         setLoadingPhase('Loading gallery images...');
-        
+
         // Preload ALL dome gallery images (this could be 100+ images)
         for (let i = 0; i < allCloudinaryImages.length; i++) {
           await preloadImage(allCloudinaryImages[i]);
           if (isMounted) {
             const progress = (i + 1) / allCloudinaryImages.length * 40;
             setProgress(progress);
-            
+
             // Update message at milestones
             if (progress > 10 && progress < 15) {
               setLoadingPhase('Preparing your victories...');
@@ -100,7 +104,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           }
         }
 
-                // Load fonts early
+        // Load fonts early
         setLoadingPhase('Loading custom fonts...');
         const fonts = ['Dala Floda', 'Grafier', 'Weird Serif'];
         for (let i = 0; i < fonts.length; i++) {
@@ -112,7 +116,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         }
 
         setLoadingPhase('Initializing animations...');
-        
+
         // Wait for DOM to be ready
         await new Promise(resolve => {
           if (document.readyState === 'complete') {
@@ -124,13 +128,13 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
         if (isMounted) setProgress(70);
         setLoadingPhase('Polishing the experience...');
-        
+
         // Additional delay to ensure Hero component has mounted and used cached images
         await new Promise(resolve => setTimeout(resolve, 600));
 
         if (isMounted) setProgress(85);
         setLoadingPhase('Applying final touches...');
-        
+
         await new Promise(resolve => setTimeout(resolve, 400));
 
         if (isMounted) setProgress(100);
@@ -143,7 +147,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         if (isMounted) {
           setIsComplete(true);
           setLoadingPhase('Ready!');
-          
+
           setTimeout(() => {
             onLoadingComplete();
           }, 300);
@@ -152,7 +156,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         // Continue loading remaining assets in background
         setTimeout(async () => {
           if (!isMounted) return;
-          
+
           // Load remaining timeline events
           const remainingEvents = [
             { eventKey: '2. Dizzy Hackers' },
@@ -164,7 +168,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
           for (const event of remainingEvents) {
             const images = getEventWin(event.eventKey);
-            images.forEach(src => preloadImage(src).catch(() => {}));
+            images.forEach(src => preloadImage(src).catch(() => { }));
             await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between events
           }
 
@@ -177,21 +181,21 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           PARTICIPATED_EVENTS.forEach(event => {
             const eventKey = eventKeyMap[event.folder];
             const images = eventKey ? getEventBTS(eventKey) : [];
-            images.slice(0, 4).forEach(src => preloadImage(src).catch(() => {}));
+            images.slice(0, 4).forEach(src => preloadImage(src).catch(() => { }));
           });
 
           // Load first 20 BTS photos
           const allBTSImages = getAllBTSImages();
 
           allBTSImages.slice(0, 20).forEach(src => {
-            preloadImage(src).catch(() => {});
+            preloadImage(src).catch(() => { });
           });
 
           // Load remaining BTS images slowly
           await new Promise(resolve => setTimeout(resolve, 1000));
           allBTSImages.slice(20).forEach((src, index) => {
             setTimeout(() => {
-              preloadImage(src).catch(() => {});
+              preloadImage(src).catch(() => { });
             }, index * 50); // Stagger loading
           });
         }, 500);
@@ -233,7 +237,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
                 transition={{ duration: 0.3, ease: 'easeOut' }}
               />
             </div>
-            
+
             {/* Progress Text */}
             <div className="text-center">
               <p className="text-neutral-400 text-sm">
