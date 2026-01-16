@@ -120,7 +120,9 @@ export const EVENTS: EventsConfig = {
 
   '7. Eureka': {
     bts: [],
-    win: [],
+    win: [
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1768581251/PHOTO-2026-01-15-19-10-13_vgfwx8.jpg',
+    ],
   },
 
   '8. Iotopia': {
@@ -284,48 +286,55 @@ export function getDomeGalleryUrl(url: string): string {
 
 /**
  * Helper Functions - Updated for Event-Based Structure
+ * All functions now apply automatic image optimization!
  */
 
 /**
- * Get all BTS images across all events
+ * Get all BTS images across all events (OPTIMIZED)
  */
 export function getAllBTSImages(): string[] {
-  return Object.values(EVENTS).flatMap(event => event.bts);
+  return Object.values(EVENTS).flatMap(event =>
+    event.bts.map(url => getThumbnailUrl(url))
+  );
 }
 
 /**
- * Get all Win images across all events
+ * Get all Win images across all events (OPTIMIZED)
  */
 export function getAllWinImages(): string[] {
-  return Object.values(EVENTS).flatMap(event => event.win);
+  return Object.values(EVENTS).flatMap(event =>
+    event.win.map(url => getThumbnailUrl(url))
+  );
 }
 
 /**
- * Get all images (both BTS and Win) across all events
+ * Get all images (both BTS and Win) across all events (OPTIMIZED)
  */
 export function getAllImages(): string[] {
-  return Object.values(EVENTS).flatMap(event => [...event.bts, ...event.win]);
+  return Object.values(EVENTS).flatMap(event =>
+    [...event.bts, ...event.win].map(url => getThumbnailUrl(url))
+  );
 }
 
 /**
- * Get images for a specific event
+ * Get images for a specific event (RAW - use for custom optimization)
  */
 export function getEventImages(eventName: string): EventImages | undefined {
   return EVENTS[eventName];
 }
 
 /**
- * Get BTS images for a specific event
+ * Get BTS images for a specific event (OPTIMIZED)
  */
 export function getEventBTS(eventName: string): string[] {
-  return EVENTS[eventName]?.bts || [];
+  return (EVENTS[eventName]?.bts || []).map(url => getThumbnailUrl(url));
 }
 
 /**
- * Get Win images for a specific event
+ * Get Win images for a specific event (OPTIMIZED)
  */
 export function getEventWin(eventName: string): string[] {
-  return EVENTS[eventName]?.win || [];
+  return (EVENTS[eventName]?.win || []).map(url => getThumbnailUrl(url));
 }
 
 /**

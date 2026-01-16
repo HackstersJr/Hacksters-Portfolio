@@ -16,7 +16,6 @@ interface TeamMember {
   contact: {
     email?: string;
     officialEmail?: string;
-    phone?: string;
     linkedin?: string;
     github?: string;
   };
@@ -35,7 +34,6 @@ export default function Team() {
       contact: {
         email: "meghnath.s.official@gmail.com",
         officialEmail: "meghnath.20231CAI0074@presidencyuniversity.in",
-        phone: "+91 9620992377",
         linkedin: "https://www.linkedin.com/in/meghnath-s/",
         github: "Blunistark"
       }
@@ -50,7 +48,6 @@ export default function Team() {
       contact: {
         email: "priyodip1304@gmail.com",
         officialEmail: "priyodip.20231CAI0149@presidencyuniversity.in",
-        phone: "+91 9592550219",
         linkedin: "https://www.linkedin.com/in/priyodip-mukhopadhyay-13o4/",
         github: "Priyo13o4"
       }
@@ -65,7 +62,6 @@ export default function Team() {
       contact: {
         email: "vishnuuu24@gmail.com",
         officialEmail: "vishnu.20231CAI0141@presidencyuniversity.in",
-        phone: "+91 8550002529",
         linkedin: "https://www.linkedin.com/in/vishnuuu24",
         github: "Vishnuuuu24"
       }
@@ -80,7 +76,6 @@ export default function Team() {
       contact: {
         email: "st308762@gmail.com",
         officialEmail: "sai.20231CAI0118@presidencyuniversity.in",
-        phone: "+91 9019886385",
         github: "tharun-guy"
       }
     },
@@ -94,7 +89,6 @@ export default function Team() {
       contact: {
         email: "vivekpatel1735@gmail.com",
         officialEmail: "vivek.20231CAI0057@presidencyuniversity.in",
-        phone: "+91 9741405332",
         linkedin: "https://www.linkedin.com/in/vivek-patel-bangalore/",
         github: "WeWake1"
       }
@@ -109,7 +103,6 @@ export default function Team() {
       contact: {
         email: "sdevanandana1@gmail.com",
         officialEmail: "devanandana.20231CAI0126@presidencyuniversity.in",
-        phone: "+91 8296215915",
         linkedin: "https://www.linkedin.com/in/devanandana-s-401677294/",
         github: "DevanandanaS"
       }
@@ -124,7 +117,6 @@ export default function Team() {
       contact: {
         email: "vedhav275@gmail.com",
         officialEmail: "vedha.20231CAI0131@presidencyuniversity.in",
-        phone: "+91 7624817889",
         linkedin: "https://www.linkedin.com/in/v-vedha-0976v/",
         github: "ved-24-2006"
       }
@@ -139,7 +131,6 @@ export default function Team() {
       contact: {
         email: "kinshuepriya.456@gmail.com",
         officialEmail: "kinshue.20231CAI0132@presidencyuniversity.in",
-        phone: "+91 7676432568",
         github: "Kinshuepriya"
       }
     }

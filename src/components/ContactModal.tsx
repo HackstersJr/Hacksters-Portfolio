@@ -1,13 +1,12 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Phone, Linkedin, Github, Copy, Check, ExternalLink } from 'lucide-react';
+import { X, Mail, Linkedin, Github, Copy, Check, ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface ContactInfo {
   email?: string;
   officialEmail?: string;
-  phone?: string;
   linkedin?: string;
   github?: string;
 }
@@ -66,14 +65,6 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
       color: 'purple',
     },
     {
-      icon: Phone,
-      label: 'Phone',
-      value: contactInfo.phone,
-      href: contactInfo.phone ? `tel:${contactInfo.phone}` : undefined,
-      copyable: true,
-      color: 'green',
-    },
-    {
       icon: Linkedin,
       label: 'LinkedIn',
       value: contactInfo.linkedin,
@@ -108,7 +99,6 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
     const colors: Record<string, { icon: string; hover: string; border: string }> = {
       cyan: { icon: 'text-cyan-400', hover: 'hover:bg-cyan-400/10 hover:border-cyan-400/30', border: 'border-cyan-400/20' },
       purple: { icon: 'text-purple-400', hover: 'hover:bg-purple-400/10 hover:border-purple-400/30', border: 'border-purple-400/20' },
-      green: { icon: 'text-green-400', hover: 'hover:bg-green-400/10 hover:border-green-400/30', border: 'border-green-400/20' },
       blue: { icon: 'text-blue-400', hover: 'hover:bg-blue-400/10 hover:border-blue-400/30', border: 'border-blue-400/20' },
       white: { icon: 'text-white', hover: 'hover:bg-white/10 hover:border-white/30', border: 'border-white/20' },
     };
@@ -206,8 +196,8 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
                           {item.href ? (
                             <a
                               href={item.href}
-                              target={item.label === 'Email' || item.label === 'Phone' ? undefined : '_blank'}
-                              rel={item.label === 'Email' || item.label === 'Phone' ? undefined : 'noopener noreferrer'}
+                              target={item.label.includes('Email') ? undefined : '_blank'}
+                              rel={item.label.includes('Email') ? undefined : 'noopener noreferrer'}
                               className="text-sm text-white font-chillax hover:underline truncate block"
                             >
                               {item.value}
