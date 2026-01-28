@@ -1072,3 +1072,17 @@
     border-radius: 8px;
   }
 }
+
+/* Devanandana avatar sizing */
+.deva-avatar-card .pc-avatar-content .avatar {
+  width: 110%;
+  transform: translateX(-50%) scale(0.85);
+  bottom: -85px;
+}
+
+/* Priyodip avatar sizing */
+.priyo-avatar-card .pc-avatar-content .avatar {
+  width: 110%;
+  transform: translateX(-50%) scale(0.75);
+  bottom: -100px;
+}

@@ -11,11 +11,11 @@ export interface TeamImages {
 
 export const TEAM_IMAGES: TeamImages = {
   meghnath: "",
-  priyodip: "",
+  priyodip: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769586413/Priyo-BG-Removed_xnwgkx.png",
   vishnu: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto,w_800/v1768210385/IMG_7119_3_Background_Removed_snagkq.png",
   tharun: "",
   vivek: "",
-  devanandana: "",
+  devanandana: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto,c_scale,w_400/v1769077483/Deva-BG-Removed_jwgyaq.png",
   vedha: "",
   kinshuepriya: "",
 };
