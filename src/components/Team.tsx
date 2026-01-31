@@ -186,7 +186,14 @@ export default function Team() {
                   enableTilt={true}
                   enableMobileTilt={false}
                   onContactClick={() => handleContactClick(member)}
-                  className={member.displayName === 'Devanandana' ? 'deva-avatar-card' : member.displayName === 'Priyodip' ? 'priyo-avatar-card' : ''}
+                  className={
+                    member.displayName === 'Devanandana' ? 'deva-avatar-card' :
+                      member.displayName === 'Priyodip' ? 'priyo-avatar-card' :
+                        member.displayName === 'Meghnath' ? 'meghnath-avatar-card' :
+                          member.displayName === 'Tharun' ? 'tharun-avatar-card' :
+                            member.displayName === 'Vivek' ? 'vivek-avatar-card' :
+                              member.displayName === 'Vedha' ? 'vedha-avatar-card' : ''
+                  }
                 />
               </div>
             ))}

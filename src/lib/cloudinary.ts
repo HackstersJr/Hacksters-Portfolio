@@ -172,26 +172,39 @@ async function fetchAllImagesFromRoot(category: 'BTS' | 'Official'): Promise<Clo
       return [];
     }
 
-    // Map all images with optimized URLs
-    return result.resources.map((resource: CloudinaryApiResource) => {
-      const optimizedUrl = getOptimizedImageUrl(resource.public_id, {
-        width: 600,
-        height: 450,
-        quality: 'auto:eco',
-        format: 'auto',
-      });
+    // Team member profile image identifiers to exclude from gallery
+    const teamProfilePatterns = [
+      'BG-Removed',  // All team member photos have this suffix
+      'IMG_7119',    // Vishnu's original photo
+    ];
 
-      return {
-        publicId: resource.public_id,
-        url: optimizedUrl,
-        secureUrl: optimizedUrl,
-        width: resource.width,
-        height: resource.height,
-        format: resource.format,
-        folder: resource.folder || 'root',
-        category: category,
-      };
-    });
+    // Map all images with optimized URLs, excluding team member profile photos
+    return result.resources
+      .filter((resource: CloudinaryApiResource) => {
+        // Exclude team member profile images from the gallery
+        return !teamProfilePatterns.some(pattern =>
+          resource.public_id.includes(pattern)
+        );
+      })
+      .map((resource: CloudinaryApiResource) => {
+        const optimizedUrl = getOptimizedImageUrl(resource.public_id, {
+          width: 600,
+          height: 450,
+          quality: 'auto:eco',
+          format: 'auto',
+        });
+
+        return {
+          publicId: resource.public_id,
+          url: optimizedUrl,
+          secureUrl: optimizedUrl,
+          width: resource.width,
+          height: resource.height,
+          format: resource.format,
+          folder: resource.folder || 'root',
+          category: category,
+        };
+      });
   } catch (error) {
     console.error('Error fetching images:', error instanceof Error ? error.message : 'Unknown error');
     return [];

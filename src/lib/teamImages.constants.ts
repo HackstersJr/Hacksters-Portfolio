@@ -10,13 +10,13 @@ export interface TeamImages {
 }
 
 export const TEAM_IMAGES: TeamImages = {
-  meghnath: "",
+  meghnath: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857326/Meghnath-BG-Removed_prn3cn.png",
   priyodip: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769586413/Priyo-BG-Removed_xnwgkx.png",
   vishnu: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto,w_800/v1768210385/IMG_7119_3_Background_Removed_snagkq.png",
-  tharun: "",
-  vivek: "",
+  tharun: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857327/Tharun-BG-Removed_jmf3nh.png",
+  vivek: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857327/Vivek-BG-Removed_crkj1y.png",
   devanandana: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto,c_scale,w_400/v1769077483/Deva-BG-Removed_jwgyaq.png",
-  vedha: "",
+  vedha: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857327/Vedha-BG-Removed_dxbcte.png",
   kinshuepriya: "",
 };
 
