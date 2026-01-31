@@ -53,33 +53,6 @@ export default function Team() {
       }
     },
     {
-      name: "Vishnu Vardhan Panchumarthi",
-      displayName: "Vishnu",
-      role: "Frontend Engineer & UI/UX Designer",
-      bio: "Frontend developer and UI/UX designer crafting beautiful, intuitive interfaces and seamless user experiences.",
-      image: TEAM_IMAGES.vishnu,
-      skills: ["React", "TypeScript", "Figma", "UI/UX"],
-      contact: {
-        email: "vishnuuu24@gmail.com",
-        officialEmail: "vishnu.20231CAI0141@presidencyuniversity.in",
-        linkedin: "https://www.linkedin.com/in/vishnuuu24",
-        github: "Vishnuuuu24"
-      }
-    },
-    {
-      name: "Sai Tharun V",
-      displayName: "Tharun",
-      role: "Software Developer",
-      bio: "Versatile software developer bridging innovation and practical solutions with clean, efficient code.",
-      image: TEAM_IMAGES.tharun,
-      skills: ["Python", "Java", "Problem Solving", "Algorithms"],
-      contact: {
-        email: "st308762@gmail.com",
-        officialEmail: "sai.20231CAI0118@presidencyuniversity.in",
-        github: "tharun-guy"
-      }
-    },
-    {
       name: "Vivek Rajendra Patel",
       displayName: "Vivek",
       role: "Full-Stack Developer",
@@ -105,6 +78,33 @@ export default function Team() {
         officialEmail: "devanandana.20231CAI0126@presidencyuniversity.in",
         linkedin: "https://www.linkedin.com/in/devanandana-s-401677294/",
         github: "DevanandanaS"
+      }
+    },
+    {
+      name: "Vishnu Vardhan Panchumarthi",
+      displayName: "Vishnu",
+      role: "Frontend Engineer & UI/UX Designer",
+      bio: "Frontend developer and UI/UX designer crafting beautiful, intuitive interfaces and seamless user experiences.",
+      image: TEAM_IMAGES.vishnu,
+      skills: ["React", "TypeScript", "Figma", "UI/UX"],
+      contact: {
+        email: "vishnuuu24@gmail.com",
+        officialEmail: "vishnu.20231CAI0141@presidencyuniversity.in",
+        linkedin: "https://www.linkedin.com/in/vishnuuu24",
+        github: "Vishnuuuu24"
+      }
+    },
+    {
+      name: "Sai Tharun V",
+      displayName: "Tharun",
+      role: "Software Developer",
+      bio: "Versatile software developer bridging innovation and practical solutions with clean, efficient code.",
+      image: TEAM_IMAGES.tharun,
+      skills: ["Python", "Java", "Problem Solving", "Algorithms"],
+      contact: {
+        email: "st308762@gmail.com",
+        officialEmail: "sai.20231CAI0118@presidencyuniversity.in",
+        github: "tharun-guy"
       }
     },
     {
