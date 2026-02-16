@@ -3,6 +3,7 @@
 import { Timeline } from "@/components/ui/timeline";
 import { getEventWin, getEventBTS } from "@/lib/cloudinaryImages.constants";
 import Image from "next/image";
+import { Trophy } from "lucide-react";
 
 export default function TimelineSection() {
   const journeyEvents = [
@@ -12,7 +13,7 @@ export default function TimelineSection() {
       subtitle: "The Beginning",
       description: "Hacksters was established with a bold vision to revolutionize technology through innovative solutions and cutting-edge research.",
       eventKey: "1. IEEE",
-      placement: "1st" as const
+      placement: "2nd" as const
     },
     {
       year: "28th Feb 2025",
@@ -112,24 +113,49 @@ export default function TimelineSection() {
     },
   ];
 
-  // Helper function to get placement dot
-  const getPlacementDot = (placement: '1st' | '2nd' | '3rd' | 'participated' | '1st-3rd') => {
+  const getPlacementDisplay = (placement: '1st' | '2nd' | '3rd' | 'participated' | '1st-3rd') => {
     switch (placement) {
       case '1st':
-        return '🟡'; // Gold
+        return {
+          label: '1st Place',
+          iconClass: 'text-yellow-300',
+          textClass: 'text-yellow-200',
+          effectClass: '[text-shadow:0_0_18px_rgba(253,224,71,0.45)]',
+        };
       case '2nd':
-        return '⚪'; // Silver
+        return {
+          label: '2nd Place',
+          iconClass: 'text-zinc-300',
+          textClass: 'text-zinc-100',
+          effectClass: '[text-shadow:0_0_18px_rgba(212,212,216,0.5)]',
+        };
       case '3rd':
-        return '🟤'; // Bronze
+        return {
+          label: '3rd Place',
+          iconClass: 'text-amber-600',
+          textClass: 'text-amber-400',
+          effectClass: '[text-shadow:0_0_16px_rgba(217,119,6,0.45)]',
+        };
       case 'participated':
-        return '🟣'; // Purple
+        return {
+          label: 'Participated',
+          iconClass: 'text-purple-300',
+          textClass: 'text-purple-200',
+          effectClass: '[text-shadow:0_0_14px_rgba(216,180,254,0.35)]',
+        };
       case '1st-3rd':
-        return '🟡🟤'; // Gold + Bronze (2 prizes)
+        return {
+          label: '1st + 3rd',
+          iconClass: 'text-yellow-300',
+          textClass: 'text-yellow-200',
+          effectClass: '[text-shadow:0_0_18px_rgba(253,224,71,0.45)]',
+        };
     }
   };
 
   // Transform journey events into Timeline format
   const timelineData = journeyEvents.map((event) => {
+    const placementDisplay = getPlacementDisplay(event.placement);
     // Get both BTS and Win images for each event, prioritize Win images
     const winImages = getEventWin(event.eventKey);
     const btsImages = getEventBTS(event.eventKey);
@@ -139,8 +165,19 @@ export default function TimelineSection() {
       title: event.year,
       content: (
         <div>
-          <p className="text-neutral-200 text-xs md:text-sm font-normal mb-4 font-chillax">
-            <span className="font-bold text-lg">{getPlacementDot(event.placement)} {event.title}</span> - {event.subtitle}
+          <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-1.5">
+              <Trophy className={`h-6 w-6 md:h-7 md:w-7 ${placementDisplay.iconClass} drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`} />
+              {event.placement === '1st-3rd' && (
+                <Trophy className="h-6 w-6 md:h-7 md:w-7 text-amber-600 drop-shadow-[0_0_10px_rgba(217,119,6,0.35)]" />
+              )}
+            </div>
+            <span className={`font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax ${placementDisplay.textClass} ${placementDisplay.effectClass}`}>
+              {placementDisplay.label}
+            </span>
+          </div>
+          <p className="text-neutral-100 text-sm md:text-base font-normal mb-4 font-chillax">
+            <span className="font-bold text-lg md:text-xl">{event.title}</span> - {event.subtitle}
           </p>
           <p className="text-neutral-400 text-xs md:text-sm font-normal mb-8 font-chillax">
             {event.description}
@@ -166,35 +203,7 @@ export default function TimelineSection() {
 
   return (
     <section id="timeline" className="relative min-h-screen bg-transparent">
-      {/* Top transition line */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/80"></div>
-
-      {/* Legend */}
-      <div className="absolute top-8 right-4 md:right-8 z-20 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-3 text-xs">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2 text-neutral-300">
-            <span>🟡</span>
-            <span>1st Place</span>
-          </div>
-          <div className="flex items-center gap-2 text-neutral-300">
-            <span>⚪</span>
-            <span>2nd Place</span>
-          </div>
-          <div className="flex items-center gap-2 text-neutral-300">
-            <span>🟤</span>
-            <span>3rd Place</span>
-          </div>
-          <div className="flex items-center gap-2 text-neutral-300">
-            <span>🟣</span>
-            <span>Participated</span>
-          </div>
-        </div>
-      </div>
-
       <Timeline data={timelineData} />
-
-      {/* Bottom transition line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/80"></div>
     </section>
   );
 }
