@@ -17,7 +17,25 @@ cloudinary.config({
   secure: true,
 });
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
+  }
+
+  const debugToken = process.env.DEBUG_API_TOKEN;
+  if (debugToken) {
+    const providedToken = request.headers.get('x-debug-token');
+    if (providedToken !== debugToken) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Unauthorized debug request',
+        },
+        { status: 401 }
+      );
+    }
+  }
+
   try {
     console.log('🔍 Testing different folder paths...');
 
@@ -77,7 +95,7 @@ export async function GET() {
     console.error('Test error:', error);
     return NextResponse.json({
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: 'Debug route failed',
     });
   }
 }

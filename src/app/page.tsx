@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
-import Timeline from '@/components/Timeline';
-import Projects from '@/components/Projects';
-import GallerySection from '@/components/GallerySection';
-import About from '@/components/About';
-import Team from '@/components/Team';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import Scripts from '@/components/Scripts';
 import PageWrapper from '@/components/PageWrapper';
+
+const Timeline = dynamic(() => import('@/components/Timeline'));
+const Projects = dynamic(() => import('@/components/Projects'));
+const GallerySection = dynamic(() => import('@/components/GallerySection'));
+const About = dynamic(() => import('@/components/About'));
+const Team = dynamic(() => import('@/components/Team'));
+const Contact = dynamic(() => import('@/components/Contact'));
+const Footer = dynamic(() => import('@/components/Footer'));
+const Scripts = dynamic(() => import('@/components/Scripts'));
 
 // Project data - Hacksters GitHub projects
 const projectsData = [

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Righteous } from "next/font/google";
-import Script from "next/script";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import "./globals.css";
 
@@ -38,12 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
-        {/* Removed Tailwind CDN - already installed locally via npm */}
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" strategy="beforeInteractive" />
-        <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet" />
-        <Script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" strategy="beforeInteractive" />
-      </head>
+      <head />
       <body className={`${inter.variable} ${righteous.variable} antialiased`}>
         <AnimatedBackground />
         {children}

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllBTSImages, getEventWin, getEventBTS } from '@/lib/cloudinaryImages.constants';
 import { PARTICIPATED_EVENTS } from '@/lib/eventsData';
+import { fetchCloudinaryImages } from '@/hooks/useCloudinaryImages';
 
 interface CloudinaryImage {
   secureUrl: string;
@@ -63,14 +64,12 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         if (!isMounted) return;
         setLoadingPhase('Fetching your moments...');
 
-        // Fetch ALL your Cloudinary images (same call Hero makes)
-        const response = await fetch('/api/images?category=all&shuffle=true');
-        const result = await response.json();
+        const result = await fetchCloudinaryImages({ category: 'all', shuffle: true });
 
         let allCloudinaryImages: string[] = [];
 
-        if (result.success && result.data?.images) {
-          allCloudinaryImages = result.data.images
+        if (result?.images) {
+          allCloudinaryImages = result.images
             .filter((img: CloudinaryImage) => img.secureUrl && img.secureUrl.trim() !== '')
             .map((img: CloudinaryImage) => img.secureUrl);
         }
