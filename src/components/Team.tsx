@@ -180,7 +180,7 @@ export default function Team() {
                   title={member.role}
                   handle={member.name.toLowerCase().replace(/\s+/g, '')}
                   status="Online"
-                  contactText="Contact"
+                  contactText="Socials"
                   avatarUrl={member.image}
                   showUserInfo={true}
                   enableTilt={true}

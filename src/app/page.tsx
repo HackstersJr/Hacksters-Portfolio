@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
+import BackToTopButton from '@/components/BackToTopButton';
 import PageWrapper from '@/components/PageWrapper';
 
 const Timeline = dynamic(() => import('@/components/Timeline'));
@@ -75,6 +76,7 @@ export default function Home() {
         <Contact />
         <Footer />
         <Scripts />
+        <BackToTopButton />
       </main>
     </PageWrapper>
   );
