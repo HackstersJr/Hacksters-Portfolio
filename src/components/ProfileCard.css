@@ -1125,11 +1125,9 @@
   .pc-card {
     width: 100%;
     max-width: 100%;
-    /* Force portrait rectangle aspect ratio for mobile */
-    aspect-ratio: 2/3;
-    height: auto;
+    height: clamp(320px, 92vw, 420px);
     max-height: none;
-    min-height: 480px;
+    aspect-ratio: auto;
   }
 
   .pc-avatar-content .avatar {
