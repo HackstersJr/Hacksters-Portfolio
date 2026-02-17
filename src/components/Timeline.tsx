@@ -119,28 +119,28 @@ export default function TimelineSection() {
         return {
           label: '1st Place',
           iconClass: 'text-yellow-300',
-          textClass: 'text-yellow-200',
+          textClass: 'bg-gradient-to-b from-yellow-100 via-yellow-300 to-amber-500 bg-clip-text text-transparent',
           effectClass: '[text-shadow:0_0_18px_rgba(253,224,71,0.45)]',
         };
       case '2nd':
         return {
           label: '2nd Place',
           iconClass: 'text-zinc-300',
-          textClass: 'text-zinc-100',
-          effectClass: '[text-shadow:0_0_18px_rgba(212,212,216,0.5)]',
+          textClass: 'bg-gradient-to-b from-zinc-50 via-zinc-300 to-zinc-500 bg-clip-text text-transparent',
+          effectClass: '[text-shadow:0_0_18px_rgba(212,212,216,0.45)]',
         };
       case '3rd':
         return {
           label: '3rd Place',
           iconClass: 'text-amber-600',
-          textClass: 'text-amber-400',
+          textClass: 'bg-gradient-to-b from-amber-200 via-amber-500 to-amber-700 bg-clip-text text-transparent',
           effectClass: '[text-shadow:0_0_16px_rgba(217,119,6,0.45)]',
         };
       case 'participated':
         return {
           label: 'Participated',
-          iconClass: 'text-purple-300',
-          textClass: 'text-purple-300',
+          iconClass: 'text-purple-400',
+          textClass: 'bg-gradient-to-b from-purple-400 via-violet-300 to-purple-500 bg-clip-text text-transparent',
           effectClass: '[text-shadow:0_0_14px_rgba(216,180,254,0.35)]',
         };
       case '1st-3rd':
