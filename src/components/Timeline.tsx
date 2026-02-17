@@ -165,22 +165,22 @@ export default function TimelineSection() {
       title: event.year,
       content: (
         <div>
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-start md:items-center gap-3 mb-2">
             <div className="flex items-center gap-1.5">
               <Trophy className={`h-6 w-6 md:h-7 md:w-7 ${placementDisplay.iconClass} drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`} />
               {event.placement === '1st-3rd' && (
                 <Trophy className="h-6 w-6 md:h-7 md:w-7 text-amber-600 drop-shadow-[0_0_10px_rgba(217,119,6,0.35)]" />
               )}
             </div>
-            <div className="flex items-center gap-3">
-              <span className={`font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax ${placementDisplay.textClass} ${placementDisplay.effectClass}`}>
+            <div className="flex flex-wrap md:flex-nowrap items-baseline gap-x-3 gap-y-1 min-w-0">
+              <span className={`min-w-0 break-words [overflow-wrap:anywhere] md:[overflow-wrap:normal] font-extrabold text-xl md:text-3xl lg:text-4xl leading-tight tracking-tight font-chillax ${placementDisplay.textClass} ${placementDisplay.effectClass}`}>
                 {placementDisplay.label}
               </span>
               <span
                 aria-hidden="true"
-                className="inline-block h-6 md:h-8 lg:h-10 w-px bg-white/40 shadow-[0_0_8px_rgba(255,255,255,0.35)]"
+                className="hidden md:inline-block h-6 md:h-8 lg:h-10 w-px bg-white/40 shadow-[0_0_8px_rgba(255,255,255,0.35)]"
               />
-              <span className="font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax text-neutral-100 [text-shadow:0_0_14px_rgba(255,255,255,0.2)]">
+              <span className="min-w-0 break-words [overflow-wrap:anywhere] md:[overflow-wrap:normal] font-extrabold text-xl md:text-3xl lg:text-4xl leading-tight tracking-tight font-chillax text-neutral-100 [text-shadow:0_0_14px_rgba(255,255,255,0.2)]">
                 {event.title}
               </span>
             </div>
@@ -188,7 +188,7 @@ export default function TimelineSection() {
           <p className="text-neutral-100 text-lg md:text-xl font-normal mb-4 font-chillax">
             {event.subtitle}
           </p>
-          <p className="text-neutral-400 text-xs md:text-sm font-normal mb-8 font-chillax">
+          <p className="text-neutral-300 text-xs md:text-sm font-normal mb-8 font-chillax">
             {event.description}
           </p>
           {allImages.length > 0 && (

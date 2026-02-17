@@ -1114,3 +1114,30 @@
   transform: translateX(-50%) scale(0.70);
   bottom: -75px;
 }
+
+/* Final mobile layout stabilization (kept interaction logic unchanged) */
+@media (max-width: 640px) {
+  .pc-card-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .pc-card {
+    width: 100%;
+    max-width: 100%;
+    /* Force portrait rectangle aspect ratio for mobile */
+    aspect-ratio: 2/3;
+    height: auto;
+    max-height: none;
+    min-height: 480px;
+  }
+
+  .pc-avatar-content .avatar {
+    width: 125%;
+    bottom: -62px;
+  }
+
+  .pc-details p {
+    width: 94%;
+  }
+}

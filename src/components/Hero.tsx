@@ -3,9 +3,23 @@
 import DomeGallery from './DomeGallery';
 import { MorphingText } from '@/components/ui/morphing-text';
 import { useCloudinaryImages } from '@/hooks/useCloudinaryImages';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    const onChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+
+    setIsMobile(media.matches);
+    media.addEventListener('change', onChange);
+
+    return () => {
+      media.removeEventListener('change', onChange);
+    };
+  }, []);
+
   // Fetch all images from Cloudinary (BTS + Official), shuffled randomly
   const { data, loading, error } = useCloudinaryImages({
     category: 'all',
@@ -37,7 +51,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-[-5] bg-black/30" />
 
       {/* DomeGallery Background - Always show with fallback to default images */}
-      <div className="absolute inset-0 z-0 opacity-100">
+      <div className="absolute inset-0 opacity-100 z-0">
         <DomeGallery
           images={domeImages}
           fit={0.6}
@@ -45,6 +59,8 @@ export default function Hero() {
           maxVerticalRotationDeg={3}
           dragSensitivity={15}
           grayscale={false}
+          interactionsEnabled={!isMobile}
+          enlargeEnabled={false}
         />
       </div>
 
@@ -62,7 +78,7 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="relative z-20 text-center px-4">
+      <div className="relative text-center px-4 z-20">
         {/* HACKSTERS - Using Righteous (BOLD, ROUNDED, FUTURISTIC) */}
         <h1
           className="text-5xl sm:text-7xl md:text-9xl lg:text-[12rem] font-bold mb-4 md:mb-6 text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.6)] tracking-tight leading-none"

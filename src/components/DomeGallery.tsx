@@ -21,6 +21,9 @@ type DomeGalleryProps = {
   imageBorderRadius?: string;
   openedImageBorderRadius?: string;
   grayscale?: boolean;
+  interactionsEnabled?: boolean;
+  enlargeEnabled?: boolean;
+  onEnlargeChange?: (isEnlarged: boolean) => void;
 };
 
 type ItemDef = {
@@ -200,7 +203,10 @@ export default function DomeGallery({
   openedImageHeight = '400px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = true
+  grayscale = true,
+  interactionsEnabled = true,
+  enlargeEnabled = true,
+  onEnlargeChange
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -411,6 +417,7 @@ export default function DomeGallery({
   useGesture(
     {
       onDragStart: (state: { event: Event }) => {
+        if (!interactionsEnabled) return;
         const { event } = state;
         if (focusedElRef.current) return;
         stopInertia();
@@ -428,6 +435,7 @@ export default function DomeGallery({
         tapTargetRef.current = potential || null;
       },
       onDrag: (state: { event: Event; last: boolean; velocity?: number[]; direction?: number[]; movement?: number[] }) => {
+        if (!interactionsEnabled) return;
         const { event, last, velocity: velArr = [0, 0], direction: dirArr = [0, 0], movement } = state;
         if (focusedElRef.current || !draggingRef.current || !startPosRef.current) return;
 
@@ -486,7 +494,7 @@ export default function DomeGallery({
           startPosRef.current = null;
           cancelTapRef.current = !isTap;
 
-          if (isTap && tapTargetRef.current && !focusedElRef.current) {
+          if (enlargeEnabled && isTap && tapTargetRef.current && !focusedElRef.current) {
             openItemFromElement(tapTargetRef.current);
           }
           tapTargetRef.current = null;
@@ -525,6 +533,7 @@ export default function DomeGallery({
         el.style.setProperty('z-index', '0');
         focusedElRef.current = null;
         rootRef.current?.removeAttribute('data-enlarging');
+          onEnlargeChange?.(false);
         openingRef.current = false;
         return;
       }
@@ -568,7 +577,7 @@ export default function DomeGallery({
       const originalImg = overlay.querySelector('img');
       if (originalImg) {
         const img = originalImg.cloneNode() as HTMLImageElement;
-        img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+        img.style.cssText = 'width: 100%; height: 100%; object-fit: contain; background: rgba(0,0,0,0.35);';
         animatingOverlay.appendChild(img);
       }
 
@@ -602,6 +611,7 @@ export default function DomeGallery({
           (el.style as CSSStyleDeclaration).zIndex = '0';
           focusedElRef.current = null;
           rootRef.current?.removeAttribute('data-enlarging');
+          onEnlargeChange?.(false);
 
           requestAnimationFrame(() => {
             parent.style.transition = '';
@@ -637,9 +647,11 @@ export default function DomeGallery({
       scrim.removeEventListener('click', close);
       window.removeEventListener('keydown', onKey);
     };
-  }, [enlargeTransitionMs, openedImageBorderRadius, grayscale]);
+  }, [enlargeTransitionMs, openedImageBorderRadius, grayscale, onEnlargeChange]);
 
   const openItemFromElement = (el: HTMLElement) => {
+    if (!enlargeEnabled) return;
+    if (!interactionsEnabled) return;
     if (cancelTapRef.current) return;
     if (openingRef.current) return;
     openingRef.current = true;
@@ -683,7 +695,7 @@ export default function DomeGallery({
     const img = document.createElement('img');
     img.src = rawSrc;
     img.alt = rawAlt;
-    img.style.cssText = `width:100%; height:100%; object-fit:cover; filter:${grayscale ? 'grayscale(1)' : 'none'};`;
+    img.style.cssText = `width:100%; height:100%; object-fit:contain; background:rgba(0,0,0,0.35); filter:${grayscale ? 'grayscale(1)' : 'none'};`;
     overlay.appendChild(img);
     viewerRef.current!.appendChild(overlay);
     const tx0 = tileR.left - frameR.left;
@@ -695,6 +707,7 @@ export default function DomeGallery({
       overlay.style.opacity = '1';
       overlay.style.transform = 'translate(0px, 0px) scale(1, 1)';
       rootRef.current?.setAttribute('data-enlarging', 'true');
+      onEnlargeChange?.(true);
     });
     const wantsResize = openedImageWidth || openedImageHeight;
     if (wantsResize) {
@@ -735,8 +748,9 @@ export default function DomeGallery({
   useEffect(() => {
     return () => {
       document.body.classList.remove('dg-scroll-lock');
+      onEnlargeChange?.(false);
     };
-  }, []);
+  }, [onEnlargeChange]);
 
   const cssStyles = `
     .sphere-root {
@@ -840,7 +854,8 @@ export default function DomeGallery({
           ref={mainRef}
           className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent"
           style={{
-            touchAction: 'none',
+            touchAction: interactionsEnabled ? 'none' : 'auto',
+            pointerEvents: interactionsEnabled ? 'auto' : 'none',
             WebkitUserSelect: 'none'
           }}
         >
@@ -870,15 +885,19 @@ export default function DomeGallery({
                   }
                 >
                   <div
-                    className="item__image absolute block overflow-hidden cursor-pointer bg-gray-200 transition-transform duration-300"
+                    className={`item__image absolute block overflow-hidden bg-gray-200 transition-transform duration-300 ${enlargeEnabled ? 'cursor-pointer' : 'cursor-default'}`}
                     role="button"
                     tabIndex={0}
                     aria-label={it.alt || 'Open image'}
                     onClick={e => {
+                      if (!enlargeEnabled) return;
+                      if (!interactionsEnabled) return;
                       if (performance.now() - lastDragEndAt.current < 80) return;
                       openItemFromElement(e.currentTarget as HTMLElement);
                     }}
                     onTouchEnd={e => {
+                      if (!enlargeEnabled) return;
+                      if (!interactionsEnabled) return;
                       if (performance.now() - lastDragEndAt.current < 80) return;
                       openItemFromElement(e.currentTarget);
                     }}
