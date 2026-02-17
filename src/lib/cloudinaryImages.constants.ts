@@ -44,7 +44,7 @@ export const EVENTS: EventsConfig = {
     bts: [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201398/IMG-20250228-WA0029_fqcq19.jpg',
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201397/IMG-20250228-WA0017_kxjuis.jpg',
-      'https://res.cloudinary.com/dswllszlj/image/upload/v1761199130/IMG-20250228-WA0030_dbhjh0.jpg',
+    
     ],
     win: [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761199129/IMG-20250228-WA0026_iyugyr.jpg',

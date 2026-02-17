@@ -7,6 +7,25 @@ const MAX_LIMIT = 200;
 
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
 
+function dedupeImageList<T extends { publicId?: string; secureUrl?: string; url?: string }>(images: T[]): T[] {
+  const seen = new Set<string>();
+  const deduped: T[] = [];
+
+  for (const image of images) {
+    const key = image.publicId || image.secureUrl || image.url;
+    if (!key) {
+      deduped.push(image);
+      continue;
+    }
+
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(image);
+  }
+
+  return deduped;
+}
+
 function getClientKey(request: Request): string {
   const forwardedFor = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
@@ -73,6 +92,8 @@ export async function GET(request: Request) {
     } else if (category === 'official') {
       images = official;
     }
+
+    images = dedupeImageList(images);
 
     // Shuffle if requested
     if (shuffle) {

@@ -97,116 +97,74 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
     return coords.map(c => ({ ...c, src: '', alt: '' }));
   }
 
-  const normalizedImages = pool.map(image => {
-    if (typeof image === 'string') {
-      return { src: image, alt: '' };
+  const normalizedImages = pool
+    .map(image => {
+      if (typeof image === 'string') {
+        return { src: image, alt: '' };
+      }
+      return { src: image.src || '', alt: image.alt || '' };
+    })
+    .filter(image => image.src);
+
+  const uniqueImagesMap = new Map<string, { src: string; alt: string }>();
+  normalizedImages.forEach(image => {
+    if (!uniqueImagesMap.has(image.src)) {
+      uniqueImagesMap.set(image.src, image);
     }
-    return { src: image.src || '', alt: image.alt || '' };
   });
 
-  // Create a grid representation for easier adjacency checking
-  const gridWidth = xCols.length;
-  const gridHeight = Math.max(evenYs.length, oddYs.length);
-  const grid: (ItemDef | null)[][] = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(null));
-
-  // Map coordinates to grid positions
-  const coordToGrid = new Map<string, { row: number; col: number }>();
-  coords.forEach((coord, index) => {
-    const col = Math.floor(index / gridHeight);
-    const row = index % gridHeight;
-    coordToGrid.set(`${coord.x},${coord.y}`, { row, col });
-  });
-
-  // Function to check if a position is adjacent (including diagonally) to any existing image with same src
-  const isAdjacentToSameImage = (row: number, col: number, src: string): boolean => {
-    for (let dr = -1; dr <= 1; dr++) {
-      for (let dc = -1; dc <= 1; dc++) {
-        if (dr === 0 && dc === 0) continue; // Skip self
-        const nr = row + dr;
-        const nc = col + dc;
-        if (nr >= 0 && nr < gridHeight && nc >= 0 && nc < gridWidth) {
-          const neighbor = grid[nr][nc];
-          if (neighbor && neighbor.src === src) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  };
-
-  // Place images with constraint that no identical images are adjacent (including diagonally)
-  const placedImages: ItemDef[] = [];
-
-  // First pass: try to place unique images without adjacency conflicts
-  const availableImages = [...normalizedImages];
-  const _usedPositions = new Set<string>();
-
-  for (let attempt = 0; attempt < totalSlots * 2; attempt++) { // Multiple attempts to find valid placements
-    let placedSomething = false;
-
-    for (let i = 0; i < coords.length; i++) {
-      const coord = coords[i];
-      const gridPos = coordToGrid.get(`${coord.x},${coord.y}`);
-      if (!gridPos || grid[gridPos.row][gridPos.col] !== null) continue;
-
-      // Find an available image that won't conflict with neighbors
-      for (let imgIndex = 0; imgIndex < availableImages.length; imgIndex++) {
-        const image = availableImages[imgIndex];
-        if (!isAdjacentToSameImage(gridPos.row, gridPos.col, image.src)) {
-          // Place the image
-          const item: ItemDef = {
-            ...coord,
-            src: image.src,
-            alt: image.alt
-          };
-          grid[gridPos.row][gridPos.col] = item;
-          placedImages.push(item);
-          availableImages.splice(imgIndex, 1); // Remove used image
-          placedSomething = true;
-          break;
-        }
-      }
-
-      // If no unique image works, we'll fill with repeats later
-    }
-
-    if (!placedSomething) break; // No more placements possible
+  const uniqueImages = Array.from(uniqueImagesMap.values());
+  if (uniqueImages.length === 0) {
+    return coords.map(c => ({ ...c, src: '', alt: '' }));
   }
 
-  // Second pass: fill remaining slots with any available images (allowing repeats but preferring non-adjacent)
+  const placedByCoord = new Map<string, ItemDef>();
+  const getCoordKey = (x: number, y: number) => `${x},${y}`;
+  const NEIGHBOR_OFFSETS: Array<[number, number]> = [
+    [0, -2],
+    [0, 2],
+    [-2, -1],
+    [-2, 1],
+    [2, -1],
+    [2, 1]
+  ];
+
+  const isAdjacentToSameImage = (x: number, y: number, src: string): boolean => {
+    return NEIGHBOR_OFFSETS.some(([dx, dy]) => {
+      const neighbor = placedByCoord.get(getCoordKey(x + dx, y + dy));
+      return Boolean(neighbor && neighbor.src === src);
+    });
+  };
+
+  const imageUsage = new Map<string, number>();
+  uniqueImages.forEach(image => imageUsage.set(image.src, 0));
+
+  const getLeastUsedCandidate = (x: number, y: number): { src: string; alt: string } => {
+    const byUsage = [...uniqueImages].sort((a, b) => {
+      const usageA = imageUsage.get(a.src) ?? 0;
+      const usageB = imageUsage.get(b.src) ?? 0;
+      if (usageA !== usageB) return usageA - usageB;
+      return a.src.localeCompare(b.src);
+    });
+
+    const nonAdjacent = byUsage.find(image => !isAdjacentToSameImage(x, y, image.src));
+    return nonAdjacent ?? byUsage[0];
+  };
+
+  const placedImages: ItemDef[] = [];
+  // Fill all slots while preferring non-adjacent placements and balancing least-used images.
   for (let i = 0; i < coords.length; i++) {
     const coord = coords[i];
-    const gridPos = coordToGrid.get(`${coord.x},${coord.y}`);
-    if (!gridPos || grid[gridPos.row][gridPos.col] !== null) continue;
+    const image = getLeastUsedCandidate(coord.x, coord.y);
+    const item: ItemDef = {
+      ...coord,
+      src: image.src,
+      alt: image.alt
+    };
 
-    // Try to find a non-conflicting image first
-    let placed = false;
-    for (const image of normalizedImages) {
-      if (!isAdjacentToSameImage(gridPos.row, gridPos.col, image.src)) {
-        const item: ItemDef = {
-          ...coord,
-          src: image.src,
-          alt: image.alt
-        };
-        grid[gridPos.row][gridPos.col] = item;
-        placedImages.push(item);
-        placed = true;
-        break;
-      }
-    }
-
-    // If all images would conflict, just use the first available image
-    if (!placed) {
-      const image = normalizedImages[0] || { src: '', alt: '' };
-      const item: ItemDef = {
-        ...coord,
-        src: image.src,
-        alt: image.alt
-      };
-      grid[gridPos.row][gridPos.col] = item;
-      placedImages.push(item);
-    }
+    placedByCoord.set(getCoordKey(coord.x, coord.y), item);
+    placedImages.push(item);
+    imageUsage.set(image.src, (imageUsage.get(image.src) ?? 0) + 1);
   }
 
   if (pool.length > totalSlots) {

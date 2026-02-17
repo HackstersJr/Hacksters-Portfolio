@@ -10,7 +10,7 @@ export default function TimelineSection() {
     {
       year: "18th Dec 2024",
       title: "IEEE",
-      subtitle: "The Beginning",
+      subtitle: "Presidency University, Bangalore",
       description: "Hacksters was established with a bold vision to revolutionize technology through innovative solutions and cutting-edge research.",
       eventKey: "1. IEEE",
       placement: "2nd" as const
@@ -140,7 +140,7 @@ export default function TimelineSection() {
         return {
           label: 'Participated',
           iconClass: 'text-purple-300',
-          textClass: 'text-purple-200',
+          textClass: 'text-purple-300',
           effectClass: '[text-shadow:0_0_14px_rgba(216,180,254,0.35)]',
         };
       case '1st-3rd':
@@ -172,12 +172,21 @@ export default function TimelineSection() {
                 <Trophy className="h-6 w-6 md:h-7 md:w-7 text-amber-600 drop-shadow-[0_0_10px_rgba(217,119,6,0.35)]" />
               )}
             </div>
-            <span className={`font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax ${placementDisplay.textClass} ${placementDisplay.effectClass}`}>
-              {placementDisplay.label}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className={`font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax ${placementDisplay.textClass} ${placementDisplay.effectClass}`}>
+                {placementDisplay.label}
+              </span>
+              <span
+                aria-hidden="true"
+                className="inline-block h-6 md:h-8 lg:h-10 w-px bg-white/40 shadow-[0_0_8px_rgba(255,255,255,0.35)]"
+              />
+              <span className="font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none tracking-tight font-chillax text-neutral-100 [text-shadow:0_0_14px_rgba(255,255,255,0.2)]">
+                {event.title}
+              </span>
+            </div>
           </div>
-          <p className="text-neutral-100 text-sm md:text-base font-normal mb-4 font-chillax">
-            <span className="font-bold text-lg md:text-xl">{event.title}</span> - {event.subtitle}
+          <p className="text-neutral-100 text-lg md:text-xl font-normal mb-4 font-chillax">
+            {event.subtitle}
           </p>
           <p className="text-neutral-400 text-xs md:text-sm font-normal mb-8 font-chillax">
             {event.description}
