@@ -17,7 +17,6 @@ export const TEAM_IMAGES: TeamImages = {
   vivek: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857327/Vivek-BG-Removed_crkj1y.png",
   devanandana: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto,c_scale,w_400/v1769077483/Deva-BG-Removed_jwgyaq.png",
   vedha: "https://res.cloudinary.com/dswllszlj/image/upload/f_auto,q_auto/v1769857327/Vedha-BG-Removed_dxbcte.png",
-  kinshuepriya: "",
 };
 
 // Placeholder avatar for members without photos

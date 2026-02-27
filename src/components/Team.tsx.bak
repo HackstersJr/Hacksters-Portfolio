@@ -120,6 +120,19 @@ export default function Team() {
         linkedin: "https://www.linkedin.com/in/v-vedha-0976v/",
         github: "ved-24-2006"
       }
+    },
+    {
+      name: "Kinshue Priya M",
+      displayName: "Kinshuepriya",
+      role: "Project & Research Associate",
+      bio: "Project coordinator driving research initiatives and ensuring seamless team collaboration.",
+      image: TEAM_IMAGES.kinshuepriya,
+      skills: ["Project Management", "Research", "Coordination", "Analysis"],
+      contact: {
+        email: "kinshuepriya.456@gmail.com",
+        officialEmail: "kinshue.20231CAI0132@presidencyuniversity.in",
+        github: "Kinshuepriya"
+      }
     }
   ];
 
@@ -155,7 +168,7 @@ export default function Team() {
               The Team
             </h2>
             <p className="text-lg md:text-xl text-gray-400 font-chillax fade-in-up">
-              7 people. Infinite caffeine & Mountain Dew.
+              8 people. Infinite caffeine & Mountain Dew.
             </p>
           </div>
 
