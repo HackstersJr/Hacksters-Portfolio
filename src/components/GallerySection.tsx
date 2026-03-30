@@ -44,6 +44,7 @@ export default function GallerySection() {
         'IEEE BTS': '1. IEEE',
         'Dizzy Hackers BTS': '2. Dizzy Hackers',
         'SheLeads BTS': '3. SheLeads',
+        'SheLeads 2.0 BTS': '3. SheLeads 2.0',
         'Innovatex BTS': '4. Innovatex',
         'NMAM BTS': '5. Hackfest NMAM',
         'NEXOVATE BTS': '6. Nexovate',

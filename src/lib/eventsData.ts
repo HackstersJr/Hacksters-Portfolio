@@ -111,6 +111,16 @@ export const BTS_EVENTS: EventData[] = [
     description: 'Empowering women in technology through innovative solutions and collaboration.',
   },
   {
+    id: 'sheleads-2-bts',
+    name: 'SheLeads 2.0 Hackathon',
+    university: 'Presidency University, Bengaluru',
+    year: '2026',
+    location: 'Bengaluru',
+    folder: 'SheLeads 2.0 BTS',
+    category: 'win',
+    description: 'A 24-hour national-level women-centric hackathon where we secured 1st place.',
+  },
+  {
     id: 'srujana-bts',
     name: 'Srujana Innovation Challenge',
     university: 'Creative Tech University',

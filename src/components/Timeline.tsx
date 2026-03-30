@@ -111,6 +111,14 @@ export default function TimelineSection() {
       eventKey: "13. MAD Expo",
       placement: "1st" as const
     },
+    {
+      year: "5th March 2026",
+      title: "SheLeads 2.0",
+      subtitle: "Presidency University, Bengaluru",
+      description: "SheLeads 2.0 was a 24-hour national-level women-centric hackathon, and we secured 1st place.",
+      eventKey: "3. SheLeads 2.0",
+      placement: "1st" as const
+    },
   ];
 
   const getPlacementDisplay = (placement: '1st' | '2nd' | '3rd' | 'participated' | '1st-3rd') => {

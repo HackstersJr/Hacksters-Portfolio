@@ -155,7 +155,7 @@ export default function Team() {
               The Team
             </h2>
             <p className="text-lg md:text-xl text-gray-400 font-chillax fade-in-up">
-              7 people. Infinite caffeine & Mountain Dew.
+              8 people. Infinite caffeine & Mountain Dew.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export default function Team() {
                   title={member.role}
                   handle={member.name.toLowerCase().replace(/\s+/g, '')}
                   status="Online"
-                  contactText="Socials"
+                  contactText="Contact"
                   avatarUrl={member.image}
                   showUserInfo={true}
                   enableTilt={true}

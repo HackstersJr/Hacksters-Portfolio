@@ -66,6 +66,18 @@ export const EVENTS: EventsConfig = {
     ],
   },
 
+  '3. SheLeads 2.0': {
+    bts: [
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1774861434/4I6A7959_p4puaa.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1774861432/4I6A7478_dht6ri.jpg',
+    ],
+    win: [
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1774861418/4I6A8332_u5owor.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1774861417/0A2A8034_y87lln.jpg',
+      'https://res.cloudinary.com/dswllszlj/image/upload/v1774861416/4I6A8441_dpgtjj.jpg',
+    ],
+  },
+
   '4. Innovatex': {
     bts: [
       'https://res.cloudinary.com/dswllszlj/image/upload/v1761201574/20250416_195451_arkgt3.heic',
