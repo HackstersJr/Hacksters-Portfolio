@@ -18,6 +18,7 @@ interface TeamMember {
     officialEmail?: string;
     linkedin?: string;
     github?: string;
+    portfolioLinks?: { label: string; url: string }[];
   };
 }
 
@@ -91,7 +92,11 @@ export default function Team() {
         email: "vishnuuu24@gmail.com",
         officialEmail: "vishnu.20231CAI0141@presidencyuniversity.in",
         linkedin: "https://www.linkedin.com/in/vishnuuu24",
-        github: "Vishnuuuu24"
+        github: "Vishnuuuu24",
+        portfolioLinks: [
+          { label: "The Edits Club", url: "https://www.theeditsclub.in" },
+          { label: "Personal Portfolio", url: "https://vishnu-cse-portfolio.vercel.app" }
+        ]
       }
     },
     {

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Linkedin, Github, Copy, Check, ExternalLink } from 'lucide-react';
+import { X, Mail, Linkedin, Github, Copy, Check, ExternalLink, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface ContactInfo {
@@ -9,6 +9,7 @@ interface ContactInfo {
   officialEmail?: string;
   linkedin?: string;
   github?: string;
+  portfolioLinks?: { label: string; url: string }[];
 }
 
 interface ContactModalProps {
@@ -80,6 +81,14 @@ export default function ContactModal({ isOpen, onClose, name, role, contactInfo 
       copyable: false,
       color: 'white',
     },
+    ...(contactInfo.portfolioLinks || []).map(link => ({
+      icon: Globe,
+      label: link.label,
+      value: link.url,
+      href: link.url,
+      copyable: false,
+      color: 'cyan',
+    })),
   ].filter(item => item.value);
 
   // Different animations for mobile (slide up) vs desktop (scale + fade)
