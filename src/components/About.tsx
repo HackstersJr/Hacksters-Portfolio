@@ -1,7 +1,7 @@
 export default function About() {
   // Dynamic stats that update automatically
-  const eventsParticipated = 13;
-  const eventsWon = 10;
+  const eventsParticipated = 14;
+  const eventsWon = 11;
   const winProbability = ((eventsWon / eventsParticipated) * 100).toFixed(0);
 
   return (
